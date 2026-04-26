@@ -13,11 +13,11 @@
 
 const SITE_CONFIG = {
   formEmails: [
-    "prodej@dumnetusil.cz",
-    "vojtech@havranek.in"
+    "vojtech@havranek.in",
+    "prodej@dumnetusil.cz"
   ],
 
   // Stránka, na kterou bude uživatel přesměrován po odeslání
   // (prázdné = zůstane na webu)
-  thankYouRedirect: ""
+  thankYouRedirect: "https://vojtech8822.github.io/dumnetusil-web/?sent=1"
 };

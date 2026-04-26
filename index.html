@@ -782,6 +782,18 @@
     });
   }, {threshold: 0.12});
   document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+  // Show thank-you message after form redirect
+  if (window.location.search.includes('sent=1')) {
+    var form = document.getElementById('contact-form');
+    form.innerHTML = '<div style="text-align:center;padding:60px 20px">'
+      + '<div style="font-size:2.4rem;margin-bottom:16px">✓</div>'
+      + '<h3 style="margin-bottom:12px">Děkujeme za váš zájem</h3>'
+      + '<p style="color:var(--ink-soft)">Vaši zprávu jsme přijali a ozveme se vám co nejdříve.</p>'
+      + '</div>';
+    document.getElementById('kontakt').scrollIntoView({behavior:'smooth'});
+    history.replaceState(null, '', window.location.pathname);
+  }
 </script>
 
 </body>
