@@ -670,15 +670,19 @@
         <p><strong>Dům Netušil</strong>Netušilova 712/15<br>614 00 Brno-Husovice</p>
       </div>
 
-      <form onsubmit="event.preventDefault();alert('Děkujeme, ozveme se.')">
+      <form id="contact-form" method="POST">
+        <input type="hidden" name="_cc" id="form-cc">
+        <input type="hidden" name="_subject" value="Nová poptávka — Dům Netušil">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="true">
         <label>Jméno a příjmení</label>
-        <input type="text" placeholder="Jan Novák" required>
+        <input type="text" name="name" placeholder="Jan Novák" required>
         <label>Telefon</label>
-        <input type="tel" placeholder="+420 000 000 000">
+        <input type="tel" name="phone" placeholder="+420 000 000 000">
         <label>E-mail</label>
-        <input type="email" placeholder="vas@email.cz" required>
+        <input type="email" name="email" placeholder="vas@email.cz" required>
         <label>Mám zájem o</label>
-        <select>
+        <select name="interest">
           <option>Konkrétní byt</option>
           <option>Informace o projektu</option>
           <option>Jsem investor</option>
@@ -686,7 +690,7 @@
           <option>Jiné</option>
         </select>
         <label>Zpráva</label>
-        <textarea placeholder="Něco nám o sobě řekněte…"></textarea>
+        <textarea name="message" placeholder="Něco nám o sobě řekněte…"></textarea>
         <button class="btn btn-primary" type="submit">Odeslat zprávu &rarr;</button>
         <p style="font-size:.74rem;color:var(--ink-mute);margin-top:22px;line-height:1.6">
           Odesláním formuláře souhlasíte se zpracováním osobních údajů za účelem poskytnutí
@@ -739,7 +743,26 @@
   </div>
 </footer>
 
+<script src="config.js"></script>
 <script>
+  // Form setup from config.js
+  (function(){
+    var emails = SITE_CONFIG.formEmails || [];
+    var form = document.getElementById('contact-form');
+    if (emails.length > 0) {
+      form.action = 'https://formsubmit.co/' + emails[0];
+    }
+    if (emails.length > 1) {
+      document.getElementById('form-cc').value = emails.slice(1).join(',');
+    }
+    var redirect = SITE_CONFIG.thankYouRedirect;
+    if (redirect) {
+      var inp = document.createElement('input');
+      inp.type = 'hidden'; inp.name = '_next'; inp.value = redirect;
+      form.appendChild(inp);
+    }
+  })();
+
   // Sticky nav background on scroll
   const nav = document.getElementById('nav');
   const onScroll = () => {
