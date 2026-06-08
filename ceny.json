@@ -1,0 +1,76 @@
+{
+  "_komentar": "Ceny jednotlivých bytů z ekonomického modelu (XLSX). Po úpravě spustit: python3 generate.py. Všechny ceny v Kč vč. DPH.",
+  "_zdroj": "20260508_Netusilova ekonomika.xlsx — sheet 'Ekonomika'",
+  "_pozn": "cena_kc = celková kupní cena bytu (bez terasy/balkonu); cena_terasy_kc = volitelná samostatná cena za terasu (pokud byt má terasu)",
+  "byty": {
+    "01": {
+      "cena_kc": 6572390,
+      "cena_kc_m2": 149000,
+      "cena_terasy_kc": 1862500,
+      "cena_terasy_kc_m2": 74500,
+      "_poznamka": "44,11 m² byt + 25 m² terasa"
+    },
+    "02": {
+      "cena_kc": 5066550,
+      "cena_kc_m2": 139000
+    },
+    "03": {
+      "cena_kc": 3974200,
+      "cena_kc_m2": 155000,
+      "cena_balkonu_kc": 344875,
+      "_poznamka": "25,64 m² + balkón 4,45 m²"
+    },
+    "04": {
+      "cena_kc": 6014530,
+      "cena_kc_m2": 139000,
+      "cena_balkonu_kc": 396845,
+      "_poznamka": "43,27 m² + balkón 5,71 m²"
+    },
+    "05": {
+      "cena_kc": 3850980,
+      "cena_kc_m2": 159000
+    },
+    "06": {
+      "cena_kc": 3992490,
+      "cena_kc_m2": 159000
+    },
+    "07": {
+      "cena_kc": 3974200,
+      "cena_kc_m2": 155000,
+      "cena_balkonu_kc": 344875,
+      "_poznamka": "25,64 m² + balkón 4,45 m²"
+    },
+    "08": {
+      "cena_kc": 6014530,
+      "cena_kc_m2": 139000,
+      "cena_balkonu_kc": 396845,
+      "_poznamka": "43,27 m² + balkón 5,71 m²"
+    },
+    "09": {
+      "cena_kc": 3850980,
+      "cena_kc_m2": 159000
+    },
+    "10": {
+      "cena_kc": 3992490,
+      "cena_kc_m2": 159000
+    },
+    "11": {
+      "cena_kc": 6056230,
+      "cena_kc_m2": 139000,
+      "cena_balkonu_kc": 504570,
+      "_poznamka": "43,57 m² + balkón 7,26 m²"
+    },
+    "12": {
+      "cena_kc": 3850980,
+      "cena_kc_m2": 159000
+    },
+    "13": {
+      "cena_kc": 3992490,
+      "cena_kc_m2": 159000
+    },
+    "14": {
+      "cena_kc": 7526250,
+      "cena_kc_m2": 125000
+    }
+  }
+}

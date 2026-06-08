@@ -1,0 +1,14 @@
+# Tento workflow je VOLITELNÝ a NENÍ POTŘEBA pro běžný workflow Dům Netušil.
+#
+# Standardní workflow (které používáme):
+#   1. Úpravy ceny.json / status.json děláme spolu v Claude chatu
+#   2. Stáhneš si nejnovější verzi web-final/ k sobě na disk
+#   3. Pushneš na GitHub
+#   4. GitHub Pages serveruje as-is
+#
+# Tento soubor NEMUSÍŠ pushovat. Pokud nechceš mít CI/CD:
+#   - před push smaž celou složku .github/
+#   - nebo nech, ale neaktivuj GitHub Actions v Settings repa
+#
+# (Šablona CI/CD workflowu, který by automaticky regeneroval web po push,
+#  je v README.md sekce "CI/CD (volitelně)".)

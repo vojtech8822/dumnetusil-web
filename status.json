@@ -1,0 +1,24 @@
+{
+  "_komentar": "Status každého bytu. Povolené hodnoty: 'k dispozici', 'rezervovano', 'prodano'. Volitelně 'poznamka' pro extra info (např. termín rezervace). Po úpravě spustit: python3 generate.py",
+  "_legenda": {
+    "k dispozici": "byt je volný k nákupu, plně viditelný, aktivní CTA",
+    "rezervovano": "byt je rezervován, viditelný se signal badge, CTA neaktivní",
+    "prodano": "byt je prodán, ztlumený design, cena přeškrtnutá"
+  },
+  "byty": {
+    "01": { "status": "k dispozici" },
+    "02": { "status": "k dispozici" },
+    "03": { "status": "k dispozici" },
+    "04": { "status": "k dispozici" },
+    "05": { "status": "k dispozici" },
+    "06": { "status": "k dispozici" },
+    "07": { "status": "k dispozici" },
+    "08": { "status": "k dispozici" },
+    "09": { "status": "k dispozici" },
+    "10": { "status": "k dispozici" },
+    "11": { "status": "k dispozici" },
+    "12": { "status": "k dispozici" },
+    "13": { "status": "k dispozici" },
+    "14": { "status": "k dispozici" }
+  }
+}
