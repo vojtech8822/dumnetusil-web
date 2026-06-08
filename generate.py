@@ -684,11 +684,11 @@ def _footer_html(base: str = "") -> str:
         </div>
         <div>
           <h4>Investor &amp; developer</h4>
-          <p>BH Projects &amp; Development<br>Mojzíška 8, 612 00 Brno</p>
+          <p>BH projects &amp; development s.r.o.<br>Mezírka 775/1, Veveří, 602 00 Brno<br>IČ: 22340432 · DIČ: CZ22340432</p>
           <p>info@domnetusil.cz</p>
         </div>
         <div class="legal">
-          © {date.today().year} BH Projects &amp; Development · Dům Netušil. Vizualizace jsou ilustrativní.
+          © {date.today().year} BH projects &amp; development s.r.o. · Dům Netušil. Vizualizace jsou ilustrativní.
         </div>
       </div>
     </footer>
@@ -1064,7 +1064,7 @@ def render_apt_page(apt: dict) -> str:
         <a class="{cta_class}" href="{cta_href}"{cta_aria}>{cta_text}</a>
         <a class="btn btn-secondary" href="../img/pudorysy/byt-{aid}.png" download>Stáhnout půdorys</a>
         <span class="small">{
-            'Odpovídáme do 24 hodin · BH Projects &amp; Development' if status == 'k dispozici'
+            'Odpovídáme do 24 hodin · BH projects &amp; development s.r.o.' if status == 'k dispozici'
             else 'Pro dotazy: info@domnetusil.cz'
         }</span>
       </div>
