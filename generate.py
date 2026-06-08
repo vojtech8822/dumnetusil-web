@@ -1201,7 +1201,7 @@ def render_index(apartments: list[dict]) -> str:
            data-patro="{_escape(apt['patro_short'])}"
            data-status="{status_class}">
           {status_overlay}
-          <div class="thumb" style="background:{apt['thumb_gradient']}">
+          <div class="thumb" style="background-image:linear-gradient(180deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.45) 100%),url('img/vizualizace/{apt['hero_img']}')">
             <span class="tag">{_escape(apt['tag'])}</span>
             <span class="status-badge status-{status_class}">{status_label}</span>
             <span class="nr-patro">Byt {apt['id']} · {_escape(apt['patro'])}</span>
