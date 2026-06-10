@@ -998,7 +998,7 @@ def render_apt_page(apt: dict) -> str:
             <tr><td>Zateplení</td><td>Minerální vata</td></tr>
             <tr><td>Patro</td><td>{_escape(apt['patro'])}</td></tr>
             <tr><td>Stav</td><td>Volný k jednání</td></tr>
-            <tr><td>Předání</td><td>Q4 2026</td></tr>
+            <tr><td>Předání</td><td>Q3 2027</td></tr>
           </table>
         </div>
       </div>
@@ -1228,7 +1228,7 @@ def render_index(apartments: list[dict]) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Dům Netušil — 14 komorních bytů 1+kk, 2+kk a 3+kk v historickém měšťanském domě v centru Brna-Husovic. Zdobná fasáda, tepelné čerpadlo, zelená střecha. Předání Q4 2026.">
+<meta name="description" content="Dům Netušil — 14 komorních bytů 1+kk, 2+kk a 3+kk v historickém měšťanském domě v centru Brna-Husovic. Zdobná fasáda, tepelné čerpadlo, zelená střecha. Předání Q3 2027.">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
@@ -1279,7 +1279,7 @@ def render_index(apartments: list[dict]) -> str:
       <div><strong>14</strong><span>Bytů 1+kk, 2+kk a 3+kk</span></div>
       <div><strong>24–60 m²</strong><span>Výměra jednotek</span></div>
       <div><strong>Památková zóna</strong><span>Historická fasáda</span></div>
-      <div><strong>Únor 2027</strong><span>Plánované dokončení</span></div>
+      <div><strong>Q3 2027</strong><span>Plánované dokončení</span></div>
     </div>
   </div>
 </header>
