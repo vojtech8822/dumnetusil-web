@@ -120,7 +120,7 @@ APARTMENTS = [
                         "s vlastní 25m² terasou, která se otevírá do tichého vnitrobloku. "
                         "Obývací pokoj s kuchyňským koutem (24,87 m²) je centrálním prostorem "
                         "bytu, ložnice nabízí klidné zázemí pro spánek.\n\n"
-                        "Pro lidi, kteří chtějí v centru Brna vlastní outdoor prostor — "
+                        "Pro lidi, kteří chtějí v centru Brna vlastní venkovní prostor — "
                         "rodinu, pár se psem nebo investory cílící na prémiový nájem."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "24,87 m²"),
@@ -133,7 +133,7 @@ APARTMENTS = [
             "Privátní terasa 25 m² do vnitrobloku",
             "Otevřená dispozice obývák + KK",
             "Samostatná ložnice s oknem",
-            "Koupelna s vanou a WC",
+            "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
         ],
         "images": ["1np-2kk.jpg", "1np-loznice-2kk.jpg", "ext-4.jpg"],
@@ -156,7 +156,7 @@ APARTMENTS = [
                         "(17,58 m²) propojuje denní život, samostatná ložnice nabízí klidné "
                         "zázemí.\n\n"
                         "Vhodný pro pár, jednotlivce nebo jako investiční byt s potenciálem "
-                        "vyššího nájemného — přízemí v Husovicích je vyhledávané studenty MU "
+                        "vyššího nájemného — přízemí v Husovicích je vhodné pro studenty a mladé profesionály "
                         "i mladými profesionály."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "17,58 m²"),
@@ -168,7 +168,7 @@ APARTMENTS = [
             "Orientace do ulice s historickou fasádou",
             "Otevřená dispozice obývák + KK",
             "Samostatná ložnice s oknem",
-            "Koupelna s vanou a WC",
+            "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
         ],
         "images": ["1np-2kk.jpg", "1np-loznice-2kk.jpg", "ext-1.jpg"],
@@ -199,7 +199,7 @@ APARTMENTS = [
         "features": [
             "Vlastní balkon 4,45 m² do vnitrobloku",
             "Otevřená dispozice obývák + KK",
-            "Koupelna s vanou a WC",
+            "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
             "2. nadzemní patro — světlo a klid",
         ],
@@ -234,7 +234,7 @@ APARTMENTS = [
             "Vlastní balkon 5,71 m² do vnitrobloku",
             "Velký obývák s KK (20,59 m²)",
             "Samostatná ložnice",
-            "Koupelna s vanou a WC",
+            "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
         ],
         "images": ["2np-2kk.jpg", "2np-loznice-2kk.jpg", "ext-4.jpg"],
@@ -263,7 +263,7 @@ APARTMENTS = [
         "features": [
             "Orientace do ulice s historickou fasádou",
             "Otevřená dispozice obývák + KK",
-            "Koupelna s vanou a WC",
+            "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
             "Nejdostupnější byt v domě",
         ],
@@ -294,7 +294,7 @@ APARTMENTS = [
         "features": [
             "Orientace do tichého vnitrobloku",
             "Otevřená dispozice obývák + KK",
-            "Koupelna s vanou a WC",
+            "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
         ],
         "images": ["3np-1kk.jpg", "3np-1kk-ii.jpg", "ext-4.jpg"],
@@ -306,15 +306,15 @@ APARTMENTS = [
         "id": "07", "patro": "3.NP", "patro_short": "3.NP",
         "dispozice": "1+kk", "plocha": 25.64,
         "extra": {"typ": "balkón", "plocha": 4.45, "popis": "Balkón 4,45 m²"},
-        "tag": "Investorský favorit",
+        "tag": "Vhodný pro investory",
         "headline": "1+kk s balkonem ve 3.NP",
-        "headline_html": '1+kk <em>s balkonem</em><br>investorský favorit',
+        "headline_html": '1+kk <em>s balkonem</em><br>vhodný pro investora',
         "lead": ("Kompaktní 1+kk s balkonem do vnitrobloku. Nejlikvidnější velikost "
                  "pro pronájem v Brně — studenti MU i mladí profesionálové."),
         "description": ("Byt 07 je 1+kk se balkonem ve třetím patře — vyšší patro = více "
                         "světla a klidu od ulice. Otevřený obývák s kuchyňským koutem "
                         "(16,20 m²), balkon 4,45 m² do vnitrobloku.\n\n"
-                        "Nejlepší investiční byt v domě podle analýzy nájemného trhu — "
+                        "Velmi atraktivní investiční byt v domě podle analýzy nájemného trhu — "
                         "kombinace velikosti, vyššího patra a balkonu maximalizuje cenu "
                         "za nájem."),
         "rooms": [
@@ -327,7 +327,7 @@ APARTMENTS = [
             "Vlastní balkon 4,45 m² do vnitrobloku",
             "3. nadzemní patro — světlo a klid",
             "Otevřená dispozice obývák + KK",
-            "Koupelna s vanou a WC",
+            "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
         ],
         "images": ["3np-1kk.jpg", "3np-1kk-2.jpg", "ext-4.jpg"],
@@ -359,7 +359,7 @@ APARTMENTS = [
             "Vlastní balkon 5,71 m² do vnitrobloku",
             "Samostatná ložnice",
             "3. nadzemní patro — světlo a klid",
-            "Koupelna s vanou a WC",
+            "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
         ],
         "images": ["2np-2kk.jpg", "2np-loznice-2kk.jpg", "ext-4.jpg"],
@@ -390,7 +390,7 @@ APARTMENTS = [
             "Orientace do ulice — pohled na historickou fasádu",
             "3. nadzemní patro — lepší světlo",
             "Otevřená dispozice obývák + KK",
-            "Koupelna s vanou a WC",
+            "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
         ],
         "images": ["3np-1kk-ii.jpg", "3np-1kk.jpg", "ext-1.jpg"],
@@ -410,7 +410,7 @@ APARTMENTS = [
         "description": ("Byt 10 je 1+kk orientovaný do vnitrobloku ve třetím patře. "
                         "Maximální ticho, lepší světlo než v nižších patrech, otevřený "
                         "obývák s KK (16,11 m²).\n\n"
-                        "Pro toho, kdo prioritizuje klid — workfromhome, klidný spánek, "
+                        "Pro toho, kdo prioritizuje klid — práci z domova, klidný spánek, "
                         "tichá lokalita uprostřed města."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "16,11 m²"),
@@ -421,7 +421,7 @@ APARTMENTS = [
             "Orientace do tichého vnitrobloku",
             "3. nadzemní patro — lepší světlo a klid",
             "Otevřená dispozice obývák + KK",
-            "Koupelna s vanou a WC",
+            "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
         ],
         "images": ["3np-1kk-2.jpg", "3np-1kk-ii.jpg", "ext-4.jpg"],
@@ -431,19 +431,18 @@ APARTMENTS = [
     },
     {
         "id": "11", "patro": "4.NP", "patro_short": "4.NP",
-        "dispozice": "2+kk mezonet", "plocha": 43.57,
+        "dispozice": "2+kk", "plocha": 43.57,
         "extra": {"typ": "balkón", "plocha": 7.26, "popis": "Balkón 7,26 m²"},
-        "tag": "Podkroví · Top byt",
-        "headline": "2+kk mezonet s největším balkonem",
+        "tag": "S balkonem 7,26 m²",
+        "headline": "2+kk s největším balkonem v domě",
         "headline_html": 'Podkrovní 2+kk <em>s největším</em><br>balkonem v domě',
-        "lead": ("Mezonet 2+kk s největším balkonem v domě (7,26 m²) a charakteristickou "
-                 "atmosférou zkosených stropů. Nejvyšší kvalita světla."),
-        "description": ("Byt 11 je nejvyšší 2+kk v domě — mezonet ve čtvrtém patře pod "
-                        "podkrovím s velkým balkonem (7,26 m²) a atmosférou zkosených stropů. "
-                        "Obývák s KK (19,73 m²), ložnice (13,23 m²) — nejvyšší úroveň světla "
-                        "v celém domě.\n\n"
-                        "Pro toho, kdo chce v centru Brna výjimečný byt s podkrovní atmosférou — "
-                        "rodina, designově vnímavý kupující, sběratel autentických prostor."),
+        "lead": ("2+kk s největším balkonem v domě (7,26 m²) ve 4. patře. Velký obývák, "
+                 "oddělená ložnice, sluníčko shora od podkroví. Nejvyšší kvalita světla."),
+        "description": ("Byt 11 je 2+kk ve 4. patře s největším balkonem v celém domě (7,26 m²) "
+                        "do tichého vnitrobloku se zelenou střechou. Otevřený obývák s KK (19,73 m²), "
+                        "oddělená ložnice (13,23 m²), koupelna a předsíň.\n\n"
+                        "Pro toho, kdo chce v centru Brna velkorysý byt s prémiovým venkovním prostorem — "
+                        "rodina, pár se psem, lidé, kteří chtějí mít kus zahrady i ve městě."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "19,73 m²"),
             ("Ložnice", "13,23 m²"),
@@ -453,10 +452,10 @@ APARTMENTS = [
         ],
         "features": [
             "Největší balkon v domě — 7,26 m²",
-            "Mezonet — zkosené stropy",
+            "Vyšší (4.) patro — světlo a klid",
             "Maximum světla v domě",
             "Samostatná ložnice",
-            "Koupelna s vanou a WC",
+            "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
         ],
         "images": ["4np-2kk.jpg", "4np-loznice-2kk.jpg", "ext-4.jpg"],
@@ -469,9 +468,9 @@ APARTMENTS = [
         "dispozice": "1+kk", "plocha": 24.22,
         "extra": None,
         "tag": "Nejvyšší patro",
-        "headline": "1+kk ve 4. patře",
+        "headline": "1+kk ve 4. NP s pohledem do ulice",
         "headline_html": '1+kk <em>v nejvyšším</em><br>bytovém patře',
-        "lead": ("1+kk v nejvyšším bytovém patře. Nejvyšší světelná kvalita a klid v domě."),
+        "lead": ("1+kk ve 4. NP. Nejvyšší světelná kvalita a klid v domě."),
         "description": ("Byt 12 je 1+kk ve čtvrtém patře — vyšší patro znamená lepší světlo, "
                         "klid od ulice a oddálení od bezprostředního ruchu města. Otevřený "
                         "obývák s KK (16,09 m²), samostatná koupelna a předsíň.\n\n"
@@ -483,10 +482,10 @@ APARTMENTS = [
             ("Předsíň", "~5 m²"),
         ],
         "features": [
-            "Nejvyšší bytové patro — maximum světla",
+            "4. NP — výborné světlo a klid",
             "Orientace do ulice — pohled na fasádu",
             "Otevřená dispozice obývák + KK",
-            "Koupelna s vanou a WC",
+            "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
         ],
         "images": ["4np-1kk.jpg", "3np-1kk-ii.jpg", "ext-1.jpg"],
@@ -499,13 +498,13 @@ APARTMENTS = [
         "dispozice": "1+kk", "plocha": 25.11,
         "extra": None,
         "tag": "Nejvyšší patro",
-        "headline": "1+kk do vnitrobloku ve 4.NP",
+        "headline": "1+kk ve 4. NP do tichého vnitrobloku",
         "headline_html": '1+kk <em>v nejvyšším patře</em><br>s klidem vnitrobloku',
         "lead": ("1+kk ve čtvrtém patře s výhledem do vnitrobloku. Maximum klidu a světla."),
         "description": ("Byt 13 je 1+kk ve čtvrtém patře orientovaný do tichého vnitrobloku — "
                         "kombinace, kterou v centru města jen málokdo nabídne. Otevřený obývák "
                         "s KK (16,11 m²), samostatná koupelna a předsíň.\n\n"
-                        "Pro toho, kdo prioritizuje klid v centru — workfromhome, "
+                        "Pro toho, kdo prioritizuje klid v centru — práci z domova, "
                         "tichý spánek, oddálení od ruchu."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "16,11 m²"),
@@ -513,10 +512,10 @@ APARTMENTS = [
             ("Předsíň", "~5 m²"),
         ],
         "features": [
-            "Nejvyšší bytové patro",
+            "4. NP — vyšší patro",
             "Orientace do tichého vnitrobloku",
             "Otevřená dispozice obývák + KK",
-            "Koupelna s vanou a WC",
+            "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
         ],
         "images": ["4np-1kk.jpg", "3np-1kk-2.jpg", "ext-4.jpg"],
@@ -526,35 +525,33 @@ APARTMENTS = [
     },
     {
         "id": "14", "patro": "Podkroví", "patro_short": "5.NP",
-        "dispozice": "3+kk", "plocha": 60.21,
+        "dispozice": "2+kk se šatnou", "plocha": 60.21,
         "extra": None,
-        "tag": "Top patro",
-        "headline": "3+kk v nejvyšším patře",
-        "headline_html": 'Podkrovní 3+kk <em>největší</em><br>byt v domě',
-        "lead": ("Největší jednotka v domě. Tři místnosti s kuchyňským koutem, světlem shora "
-                 "a výhledem do okolí. Plnohodnotný byt v nejvyšším patře."),
-        "description": ("Byt 14 je vlajková loď celého projektu — největší 3+kk v podkroví "
-                        "s OBÝVACÍ POKOJEM (27,39 m²), šatnou, dvěma koupelnami a galerií. "
-                        "Atmosféra zkosených stropů, světlo přicházející shora, "
-                        "vyhlídka do okolí.\n\n"
-                        "Pro rodinu, pár se zázemím pro hosta, nebo prémiového kupujícího, "
-                        "který si v centru Brna chce dopřát výjimečný byt."),
+        "tag": "Podkroví · Top byt",
+        "headline": "Podkrovní 2+kk se šatnou",
+        "headline_html": 'Podkrovní 2+kk <em>největší</em><br>byt v domě se šatnou',
+        "lead": ("Největší jednotka v domě (60,21 m²). Velkorysý obývák s KK, samostatná ložnice, "
+                 "šatna, koupelna a galerie. Sluneční světlo shora, atmosféra podkroví."),
+        "description": ("Byt 14 je vlajková loď projektu — největší jednotka v domě (60,21 m²) v podkroví. "
+                        "Velkorysý obývák s kuchyňským koutem (27,39 m²), samostatná ložnice, šatna a koupelna. "
+                        "Atmosféra šikmých stropů, světlo přicházející shora, vyhlídka do okolí.\n\n"
+                        "Pro pár nebo malou rodinu, která si v centru Brna chce dopřát výjimečně velkorysý byt "
+                        "s prémiovou podkrovní atmosférou."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "27,39 m²"),
             ("Hala", "~6 m²"),
             ("Galerie", "~10 m²"),
             ("Šatna", "3,61 m²"),
+            ("Ložnice", "~10 m²"),
             ("Koupelna + WC", "~4 m²"),
-            ("Sociální zázemí", "~5 m²"),
-            ("Schodiště interní", "~5 m²"),
         ],
         "features": [
             "Největší byt v domě (60,21 m²)",
-            "Podkrovní atmosféra — zkosené stropy",
-            "Vlastní galerie",
-            "Šatna",
-            "Dva sociální celky",
-            "Maximální množství světla",
+            "Podkrovní atmosféra — šikmé stropy",
+            "Vlastní šatna",
+            "Galerie nad obývákem",
+            "Maximální množství světla shora",
+            "K dispozici — vlajková loď projektu",
         ],
         "images": ["4np-2kk.jpg", "4np-loznice-2kk.jpg", "ext-4.jpg"],
         "hero_img": "4np-2kk.jpg",
@@ -640,8 +637,11 @@ nav.top .back:hover{color:var(--accent-dark)}
 @media(max-width:900px){nav.top ul{display:none}}
 
 footer{background:var(--ink);color:rgba(255,255,255,.6);padding:60px 0 40px;font-size:.86rem}
-footer .wrap{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px}
+footer .wrap{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:36px}
+@media(max-width:1000px){footer .wrap{grid-template-columns:1fr 1fr;gap:30px}}
 @media(max-width:760px){footer .wrap{grid-template-columns:1fr;gap:30px}}
+footer a{color:rgba(255,255,255,.85);text-decoration:none}
+footer a:hover{color:#fff}
 footer h4{font-family:var(--serif);color:#fff;font-size:1.2rem;margin-bottom:14px;font-weight:500}
 footer p{color:rgba(255,255,255,.55);font-size:.86rem;margin-bottom:8px}
 footer ul{list-style:none;padding:0;margin:0}
@@ -683,12 +683,19 @@ def _footer_html(base: str = "") -> str:
           </ul>
         </div>
         <div>
+          <h4>Kontakt</h4>
+          <p><strong>Vojtěch Havránek</strong><br><a href="tel:+420605201450">+420 605 201 450</a></p>
+          <p><strong>Martina Bodová</strong><br><a href="tel:+420603722268">+420 603 722 268</a></p>
+          <p><a href="mailto:info@dumnetusil.cz">info@dumnetusil.cz</a></p>
+        </div>
+        <div>
           <h4>Investor &amp; developer</h4>
           <p>BH projects &amp; development s.r.o.<br>Mezírka 775/1, Veveří, 602 00 Brno<br>IČ: 22340432 · DIČ: CZ22340432</p>
-          <p>info@domnetusil.cz</p>
         </div>
         <div class="legal">
           © {date.today().year} BH projects &amp; development s.r.o. · Dům Netušil. Vizualizace jsou ilustrativní.
+          <span style="margin:0 8px">·</span>
+          <a href="{base}ochrana-osobnich-udaju.html" style="color:rgba(255,255,255,.7);border-bottom:1px solid rgba(255,255,255,.3)">Ochrana osobních údajů</a>
         </div>
       </div>
     </footer>
@@ -954,8 +961,7 @@ def render_apt_page(apt: dict) -> str:
     <div class="head">
       <span class="eyebrow">Vizualizace bytu</span>
       <h2>Jak bude byt vypadat.</h2>
-      <p>Studio architektury 3D Atelier připravilo vizualizace interiéru — pro představu materiálů,
-      rozložení a atmosféry. Skutečné provedení se může v detailech lišit.</p>
+      <p>Vizualizace jsou typové — ilustrují materiálové a designové řešení projektu. Nezobrazují přesnou dispozici konkrétní jednotky. Nábytek, kuchyňská linka, svítidla a dekorace nejsou součástí dodávky, není-li ve standardu uvedeno jinak.</p>
     </div>
     <div class="grid">
       <button class="item big" data-zoom><img src="../img/vizualizace/{apt['images'][0]}" alt="Obývací pokoj bytu {aid}" loading="lazy"><div class="caption">Obývací pokoj s kuchyňským koutem</div></button>
@@ -993,11 +999,11 @@ def render_apt_page(apt: dict) -> str:
           <h3>Technické parametry</h3>
           <table>
             <tr><td>Vytápění</td><td>Tepelné čerpadlo</td></tr>
-            <tr><td>Energetická třída</td><td>B (úsporná)</td></tr>
+            <tr><td>Energetická třída</td><td>B (předpokládaná, finální PENB v procesu)</td></tr>
             <tr><td>Konstrukce stěn</td><td>Cihelné tvarovky HELUZ</td></tr>
             <tr><td>Zateplení</td><td>Minerální vata</td></tr>
             <tr><td>Patro</td><td>{_escape(apt['patro'])}</td></tr>
-            <tr><td>Stav</td><td>Volný k jednání</td></tr>
+            <tr><td>Stav</td><td>K dispozici</td></tr>
             <tr><td>Předání</td><td>Q3 2027</td></tr>
           </table>
         </div>
@@ -1020,11 +1026,12 @@ def render_apt_page(apt: dict) -> str:
       </div>
       <div>
         <span class="eyebrow">Vzorová koupelna</span>
-        <h2>Vana, designové dlažby, přírodní materiály.</h2>
+        <h2>Sprchový kout, designové dlažby, přírodní materiály.</h2>
         <p>Všechny byty v Domě Netušil mají koupelny v jednotném standardu — kvalitní obklady,
         kvalitní sanita, baterie Hansgrohe. Možnost dovybavení dle individuálního výběru klienta.</p>
         <ul>
-          <li><span>Vana</span><strong>Standard</strong></li>
+          <li><span>Sprchový kout</span><strong>Standard</strong></li>
+          <li><span>Vana</span><strong>Dle dispozice / na přání</strong></li>
           <li><span>WC kompletní</span><strong>Geberit</strong></li>
           <li><span>Obklady</span><strong>Velkoformátový gres</strong></li>
           <li><span>Podlahové vytápění</span><strong>Ano</strong></li>
@@ -1065,7 +1072,7 @@ def render_apt_page(apt: dict) -> str:
         <a class="btn btn-secondary" href="../img/pudorysy/byt-{aid}.png" download>Stáhnout půdorys</a>
         <span class="small">{
             'Odpovídáme do 24 hodin · BH projects &amp; development s.r.o.' if status == 'k dispozici'
-            else 'Pro dotazy: info@domnetusil.cz'
+            else 'Pro dotazy: info@dumnetusil.cz'
         }</span>
       </div>
     </div>
@@ -1167,6 +1174,63 @@ section{padding:120px 0;position:relative}
 .filter-status button[data-filter-status="k-dispozici"].active{background:#3a7c4c;color:#fff;border-color:#3a7c4c}
 .filter-status button[data-filter-status="rezervovano"].active{background:#b8542b;color:#fff;border-color:#b8542b}
 .filter-status button[data-filter-status="prodano"].active{background:#6b2020;color:#fff;border-color:#6b2020}
+
+/* === Sekce O projektu, Lokalita, Galerie === */
+.grid-2col{display:grid;grid-template-columns:1.3fr 1fr;gap:60px;align-items:start}
+.grid-2col.reverse{grid-template-columns:1fr 1.3fr}
+@media(max-width:900px){.grid-2col,.grid-2col.reverse{grid-template-columns:1fr;gap:40px}.grid-2col.reverse > div:first-child{order:2}}
+
+.o-projektu{background:var(--bg);padding:100px 0}
+.o-projektu h2{margin-bottom:20px}
+.o-projektu h2 em{font-style:italic;color:var(--accent)}
+.o-projektu .lead{font-size:1.1rem;line-height:1.7;color:var(--ink-soft);margin-bottom:1.4em}
+.o-projektu p{font-size:.98rem;line-height:1.7}
+.o-projektu .pull{border-left:3px solid var(--accent);padding:14px 0 14px 24px;margin:30px 0 0;font-family:var(--serif);font-size:1.3rem;color:var(--ink);font-style:italic;line-height:1.4}
+.o-projektu .stats-card{background:var(--paper);border:1px solid var(--line);padding:40px}
+.o-projektu .stat-row{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line);font-size:.94rem}
+.o-projektu .stat-row:last-child{border-bottom:0}
+.o-projektu .stat-row span{color:var(--ink-mute);text-transform:uppercase;letter-spacing:.1em;font-size:.74rem;font-weight:600}
+.o-projektu .stat-row strong{font-family:var(--serif);color:var(--ink);font-weight:500;font-size:1.1rem}
+
+.lokalita{background:var(--paper);padding:100px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.lokalita h2{margin-bottom:20px}
+.lokalita h2 em{font-style:italic;color:var(--accent)}
+.lokalita h3{font-size:1.05rem;text-transform:uppercase;letter-spacing:.12em;font-weight:600;color:var(--ink-mute);margin:30px 0 14px;font-family:var(--sans)}
+.lokalita .lead{font-size:1.1rem;line-height:1.7;color:var(--ink-soft);margin-bottom:1.4em}
+.lokalita .loc-img{width:100%;height:auto;border:1px solid var(--line)}
+.lokalita .loc-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:28px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:24px 0}
+.lokalita .loc-facts > div strong{display:block;font-family:var(--serif);font-size:1.5rem;color:var(--ink);font-weight:500;line-height:1;margin-bottom:4px}
+.lokalita .loc-facts > div span{font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-mute)}
+.lokalita .loc-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
+.lokalita .loc-list li{padding-left:22px;position:relative;font-size:.94rem;color:var(--ink-soft)}
+.lokalita .loc-list li::before{content:"";position:absolute;left:0;top:.6em;width:12px;height:1px;background:var(--accent)}
+
+.galerie{background:var(--bg);padding:100px 0}
+.galerie .head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end}
+@media(max-width:900px){.galerie .head{grid-template-columns:1fr;gap:20px}}
+.galerie h2{margin-bottom:0}
+.galerie .head p{margin:0;color:var(--ink-soft);max-width:520px;font-size:.92rem;font-style:italic}
+.galerie .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:280px 280px;gap:18px}
+.galerie .gal-item{display:block;overflow:hidden;border:0;cursor:zoom-in}
+.galerie .gal-item.big{grid-row:span 2}
+.galerie .gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.galerie .gal-item:hover img{transform:scale(1.05)}
+@media(max-width:900px){.galerie .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}.galerie .gal-item.big{grid-row:auto}.galerie .gal-item img{height:240px}}
+@media(max-width:600px){.galerie .gallery-grid{grid-template-columns:1fr}}
+
+.kontakt{background:var(--ink);color:#fff;padding:100px 0 80px}
+.kontakt h2{color:#fff;margin-bottom:20px}
+.kontakt .lead{font-size:1.06rem;line-height:1.65;margin-bottom:0}
+.kontakt .contact-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:600px){.kontakt .contact-cards{grid-template-columns:1fr}}
+.kontakt .contact-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);padding:30px 28px}
+.kontakt .contact-card .role{font-size:.7rem;text-transform:uppercase;letter-spacing:.18em;color:#e4c792;font-weight:700;margin-bottom:10px}
+.kontakt .contact-card h3{font-family:var(--serif);color:#fff;font-size:1.5rem;font-weight:500;margin:0 0 16px}
+.kontakt .contact-card p{margin:0 0 6px;font-size:.98rem}
+.kontakt .contact-card a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3);transition:border-color .2s}
+.kontakt .contact-card a:hover{border-color:#fff}
+.kontakt .contact-developer{margin-top:50px;padding-top:30px;border-top:1px solid rgba(255,255,255,.15);font-size:.84rem;color:rgba(255,255,255,.6)}
+.kontakt .contact-developer strong{color:rgba(255,255,255,.85);font-weight:600;margin-right:6px}
 """).strip()
 
 
@@ -1228,7 +1292,7 @@ def render_index(apartments: list[dict]) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Dům Netušil — 14 komorních bytů 1+kk, 2+kk a 3+kk v historickém měšťanském domě v centru Brna-Husovic. Zdobná fasáda, tepelné čerpadlo, zelená střecha. Předání Q3 2027.">
+<meta name="description" content="Dům Netušil — 14 komorních bytů 1+kk a 2+kk v historickém měšťanském domě v centru Brna-Husovic. Zdobná fasáda, tepelné čerpadlo, zelená střecha. Předání 3. čtvrtletí 2027.">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
@@ -1239,7 +1303,7 @@ def render_index(apartments: list[dict]) -> str:
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Dům Netušil — 14 komorních bytů v centru Brna-Husovic">
-<meta property="og:description" content="Nové byty 1+kk, 2+kk a 3+kk v historickém měšťanském domě. Zdobná fasáda, tepelné čerpadlo, zelená střecha.">
+<meta property="og:description" content="Nové byty 1+kk a 2+kk v historickém měšťanském domě. Zdobná fasáda, tepelné čerpadlo, zelená střecha.">
 <meta property="og:url" content="{SITE_URL}/">
 <meta property="og:image" content="{SITE_URL}/img/vizualizace/ext-1.jpg">
 <meta property="og:locale" content="cs_CZ">
@@ -1268,7 +1332,7 @@ def render_index(apartments: list[dict]) -> str:
   <div class="wrap inner">
     <span class="eyebrow">Netušilova 15 · Brno-Husovice</span>
     <h1>Husovice,<br>jak je <em>ještě neznáte</em>.</h1>
-    <p class="lead">Čtrnáct komorních bytů 1+kk, 2+kk a 3+kk v historickém měšťanském domě
+    <p class="lead">Čtrnáct komorních bytů 1+kk a 2+kk v historickém měšťanském domě
     v srdci Brna-Husovic. Zdobná fasáda z konce 19. století.
     Nové interiéry, tepelné čerpadlo, zelená střecha. Deset minut tramvají do centra.</p>
     <div class="cta">
@@ -1276,7 +1340,7 @@ def render_index(apartments: list[dict]) -> str:
       <a class="btn btn-ghost" href="#kontakt">Zjistit cenu</a>
     </div>
     <div class="facts">
-      <div><strong>14</strong><span>Bytů 1+kk, 2+kk a 3+kk</span></div>
+      <div><strong>14</strong><span>Bytů 1+kk a 2+kk</span></div>
       <div><strong>24–60 m²</strong><span>Výměra jednotek</span></div>
       <div><strong>Památková zóna</strong><span>Historická fasáda</span></div>
       <div><strong>Q3 2027</strong><span>Plánované dokončení</span></div>
@@ -1292,14 +1356,14 @@ def render_index(apartments: list[dict]) -> str:
         <h2>14 bytů. 14 různých příběhů.</h2>
       </div>
       <p>Vyberte si podle velikosti, patra nebo vybavení. Každý byt v Domě Netušil
-      má něco svého — od kompaktních 1+kk až po podkrovní 3+kk.</p>
+      má něco svého — od kompaktních 1+kk až po podkrovní 2+kk se šatnou.</p>
     </div>
 
     <div class="filter" role="group" aria-label="Filtr podle dispozice">
       <button data-filter-disp="all" class="active">Všechny ({total_count})</button>
       <button data-filter-disp="1+kk">1+kk ({count_1kk})</button>
       <button data-filter-disp="2+kk">2+kk ({count_2kk})</button>
-      <button data-filter-disp="3+kk">3+kk ({count_3kk})</button>
+      
     </div>
 
     <div class="filter filter-status" role="group" aria-label="Filtr podle dostupnosti">
@@ -1311,6 +1375,134 @@ def render_index(apartments: list[dict]) -> str:
 
     <div class="grid" id="aptsGrid">
       {chr(10).join(cards_html)}
+    </div>
+  </div>
+</section>
+
+<!-- O PROJEKTU -->
+<section class="o-projektu" id="o-projektu">
+  <div class="wrap">
+    <div class="grid-2col">
+      <div>
+        <span class="eyebrow">O projektu</span>
+        <h2>Vracíme domu jeho<br><em>původní hodnotu.</em></h2>
+        <p class="lead">Na nároží Netušilovy a Elgartovy stojí od konce 19. století měšťanský dům
+        se zdobnou uliční fasádou — sokly, římsy, špalety, ornamenty. Sto let sloužil jako
+        rodinný dům. Dnes z něj vzniká komorní bytový dům se 14 byty — s respektem k historii
+        i k těm, kdo do něj nastěhují.</p>
+
+        <p>Renovace zachovává zdobnou uliční fasádu a doplňuje ji o citlivé moderní detaily —
+        okna z vrstveného dřeva, klempířské prvky v patině měděné zelené, výrazově silnou vstupní
+        dveř. Za historickou fasádou ale vzniká v podstatě zcela nový dům: moderní izolace,
+        tepelné čerpadlo, podlahové vytápění, centrální vzduchotechnika, optická síť.</p>
+
+        <div class="pull">„Fasáda zůstává. Uvnitř vzniká zcela nový dům — s tepelným čerpadlem,
+        zelenou střechou a byty, jaké dnes lidé chtějí."</div>
+      </div>
+      <div class="stats-card">
+        <div class="stat-row"><span>Rok výstavby</span><strong>1898</strong></div>
+        <div class="stat-row"><span>Počet bytů / SVJ</span><strong>14</strong></div>
+        <div class="stat-row"><span>Velikost jednotek</span><strong>24–60 m²</strong></div>
+        <div class="stat-row"><span>Pater</span><strong>5 + podkroví</strong></div>
+        <div class="stat-row"><span>Vytápění</span><strong>Tepelné čerpadlo</strong></div>
+        <div class="stat-row"><span>Energetická třída</span><strong>B (předpokl.)</strong></div>
+        <div class="stat-row"><span>Konstrukce</span><strong>HELUZ Family + AKU</strong></div>
+        <div class="stat-row"><span>Střecha</span><strong>Zelená, extenzivní</strong></div>
+        <div class="stat-row"><span>Předání</span><strong>3. čtvrtletí 2027</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOKALITA -->
+<section class="lokalita" id="lokalita">
+  <div class="wrap">
+    <div class="grid-2col reverse">
+      <div>
+        <img src="img/vizualizace/situace.jpg" alt="Situační plán domu na Netušilově 15" class="loc-img">
+      </div>
+      <div>
+        <span class="eyebrow">Lokalita</span>
+        <h2>Husovice — <em>nová stará</em> čtvrť Brna.</h2>
+        <p class="lead">Husovice patří dnes mezi nejvyhledávanější brněnské lokality.
+        Rychlá doprava do centra, historická zástavba, kavárenský ruch a klidný vnitroblok.</p>
+
+        <div class="loc-facts">
+          <div><strong>10 min</strong><span>Tramvají do centra</span></div>
+          <div><strong>3 min</strong><span>K tramvajové zastávce</span></div>
+          <div><strong>5 min</strong><span>K Husovickému parku</span></div>
+        </div>
+
+        <h3>Co je v okolí</h3>
+        <ul class="loc-list">
+          <li>Tramvaje 2, 4, 9 (zast. Tomkovo náměstí)</li>
+          <li>Hlavní nádraží — 12 min jízdy</li>
+          <li>Cyklostezka podél Svitavy</li>
+          <li>ZŠ Vranovská, MŠ Netušilova</li>
+          <li>Albert, Lidl, farmářský trh</li>
+          <li>Park Marie Restituty</li>
+          <li>Restaurace Pegas, Atrium</li>
+          <li>Husovický stadion</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIE -->
+<section class="galerie" id="galerie">
+  <div class="wrap">
+    <div class="head" style="margin-bottom:40px">
+      <div>
+        <span class="eyebrow">Galerie</span>
+        <h2>Vizualizace projektu.</h2>
+      </div>
+      <p>Typové vizualizace materiálového a designového řešení projektu. Nezobrazují přesnou
+      dispozici konkrétní jednotky. Nábytek, kuchyňská linka, svítidla a dekorace nejsou součástí
+      dodávky, není-li ve standardu uvedeno jinak.</p>
+    </div>
+    <div class="gallery-grid">
+      <a href="img/vizualizace/ext-1.jpg" class="gal-item big"><img src="img/vizualizace/ext-1.jpg" alt="Pohled na zdobnou uliční fasádu Netušilova 15" loading="lazy"></a>
+      <a href="img/vizualizace/ext-4.jpg" class="gal-item"><img src="img/vizualizace/ext-4.jpg" alt="Pohled na vnitroblok a zadní část domu" loading="lazy"></a>
+      <a href="img/vizualizace/1np-2kk.jpg" class="gal-item"><img src="img/vizualizace/1np-2kk.jpg" alt="Vizualizace obývacího pokoje s kuchyňským koutem (2+kk)" loading="lazy"></a>
+      <a href="img/vizualizace/1np-loznice-2kk.jpg" class="gal-item"><img src="img/vizualizace/1np-loznice-2kk.jpg" alt="Vizualizace ložnice v bytě 2+kk" loading="lazy"></a>
+      <a href="img/vizualizace/koupelna.jpg" class="gal-item"><img src="img/vizualizace/koupelna.jpg" alt="Vzorová koupelna se sprchovým koutem" loading="lazy"></a>
+      <a href="img/vizualizace/4np-2kk.jpg" class="gal-item"><img src="img/vizualizace/4np-2kk.jpg" alt="Vizualizace podkrovního bytu 2+kk" loading="lazy"></a>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section class="kontakt" id="kontakt">
+  <div class="wrap">
+    <div class="grid-2col">
+      <div>
+        <span class="eyebrow" style="color:#e4c792">Kontakt</span>
+        <h2 style="color:#fff">Pojďme se pobavit<br>o vašem novém bytě.</h2>
+        <p class="lead" style="color:rgba(255,255,255,0.85);max-width:480px">
+          Pro prohlídku modelu, individuální nabídku, otázky k financování nebo investičnímu potenciálu.
+          Detaily slevy pro předplatitele probíráme osobně. Odpovídáme do 24 hodin.
+        </p>
+      </div>
+      <div class="contact-cards">
+        <div class="contact-card">
+          <div class="role">Prodej a obchod</div>
+          <h3>Vojtěch Havránek</h3>
+          <p><a href="tel:+420605201450">+420 605 201 450</a></p>
+          <p><a href="mailto:info@dumnetusil.cz">info@dumnetusil.cz</a></p>
+        </div>
+        <div class="contact-card">
+          <div class="role">Prodej a obchod</div>
+          <h3>Martina Bodová</h3>
+          <p><a href="tel:+420603722268">+420 603 722 268</a></p>
+          <p><a href="mailto:info@dumnetusil.cz">info@dumnetusil.cz</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="contact-developer">
+      <strong>Investor &amp; developer:</strong>
+      BH projects &amp; development s.r.o. · Mezírka 775/1, Veveří, 602 00 Brno ·
+      IČ: 22340432 · DIČ: CZ22340432
     </div>
   </div>
 </section>
@@ -1408,6 +1600,7 @@ def render_sitemap() -> str:
     urls = [f"  <url><loc>{SITE_URL}/</loc><lastmod>{today}</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>"]
     for apt in APARTMENTS:
         urls.append(f"  <url><loc>{SITE_URL}/byty/byt-{apt['id']}.html</loc><lastmod>{today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>")
+    urls.append(f"  <url><loc>{SITE_URL}/ochrana-osobnich-udaju.html</loc><lastmod>{today}</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>")
     return dedent(f"""\
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
