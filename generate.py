@@ -573,8 +573,17 @@ def _fmt_m2(plocha: float) -> str:
     return f"{plocha:.2f}".replace(".", ",")
 
 def _calc_total_price(a: dict) -> int:
-    """Vrátí cenu bytu z konfigurace (ceny.json)."""
-    return int(a["cena_kc"])
+    """Vrátí celkovou kupní cenu (byt + venkovní prostor) v Kč."""
+    return int(a.get("cena_kc_celkem", a["cena_kc"]))
+
+
+def _venkov_typ(a: dict) -> str | None:
+    """Vrátí 'terasa', 'balkon' nebo None podle toho, co byt má."""
+    if a.get("cena_terasy_kc"):
+        return "terasa"
+    if a.get("cena_balkonu_kc"):
+        return "balkon"
+    return None
 
 def _escape(s: str) -> str:
     """HTML-escape pro bezpečnost."""
@@ -693,7 +702,7 @@ def _footer_html(base: str = "") -> str:
           <p>BH projects &amp; development s.r.o.<br>Mezírka 775/1, Veveří, 602 00 Brno<br>IČ: 22340432 · DIČ: CZ22340432</p>
         </div>
         <div class="legal">
-          © {date.today().year} BH projects &amp; development s.r.o. · Dům Netušil. Vizualizace jsou ilustrativní.
+          © {date.today().year} BH projects &amp; development s.r.o. · Dům Netušil. Vizualizace jsou ilustrativní. Ceny uvedené na webu jsou v Kč včetně DPH.
           <span style="margin:0 8px">·</span>
           <a href="{base}ochrana-osobnich-udaju.html" style="color:rgba(255,255,255,.7);border-bottom:1px solid rgba(255,255,255,.3)">Ochrana osobních údajů</a>
         </div>
@@ -823,7 +832,18 @@ def render_apt_page(apt: dict) -> str:
     aid = apt["id"]
     plocha_str = _fmt_m2(apt["plocha"])
     cena_str = _fmt_kc(_calc_total_price(apt))
-    cena_m2_str = _fmt_kc(apt["cena_kc_m2"])
+    cena_m2_str = _fmt_kc(apt["cena_kc_m2_zobrazit"])
+    venkov = _venkov_typ(apt)
+    cena_label_extra = (
+        " vč. terasy" if venkov == "terasa"
+        else " vč. balkonu" if venkov == "balkon"
+        else ""
+    )
+    kc_m2_pozn = (
+        " (vč. terasy)" if venkov == "terasa"
+        else " (vč. balkonu)" if venkov == "balkon"
+        else ""
+    )
     next_apt = next((a for a in APARTMENTS if a["id"] == apt["next_id"]), None)
     extra_text = apt["extra"]["popis"] if apt["extra"] else apt["patro"]
 
@@ -949,9 +969,9 @@ def render_apt_page(apt: dict) -> str:
   <div class="wrap">
     <p>{_escape(apt['lead'])}</p>
     <div class="price-mini">
-      <div class="label">Kupní cena</div>
+      <div class="label">Kupní cena{cena_label_extra}</div>
       <div class="amount">{cena_str}&nbsp;Kč</div>
-      <div class="sub">{cena_m2_str} Kč/m² · vč. DPH</div>
+      <div class="sub">{cena_m2_str} Kč/m²{kc_m2_pozn}</div>
     </div>
   </div>
 </section>
@@ -1064,10 +1084,10 @@ def render_apt_page(apt: dict) -> str:
       </div>
       <div class="price-card status-card-{status_class}">
         <div class="label">{
-            'Kupní cena (vč. DPH)' if status != 'prodano' else 'Prodejní cena (vč. DPH)'
+            (f'Kupní cena{cena_label_extra}') if status != 'prodano' else (f'Prodejní cena{cena_label_extra}')
         }</div>
         <div class="amount {'amount-sold' if status == 'prodano' else ''}">{cena_str}&nbsp;Kč</div>
-        <div class="sub">{cena_m2_str} Kč/m²{' · Výhodnější cena pro předplatitele (50–70 % kupní ceny)' if status == 'k dispozici' else ''}</div>
+        <div class="sub">{cena_m2_str} Kč/m²{kc_m2_pozn}{' · Výhodnější cena pro předplatitele (50–70 % kupní ceny)' if status == 'k dispozici' else ''}</div>
         <a class="{cta_class}" href="{cta_href}"{cta_aria}>{cta_text}</a>
         <a class="btn btn-secondary" href="../img/pudorysy/byt-{aid}.png" download>Stáhnout půdorys</a>
         <span class="small">{
@@ -1279,7 +1299,7 @@ def render_index(apartments: list[dict]) -> str:
             </div>
             <p class="desc">{_escape(apt['lead'][:120])}…</p>
             <div class="foot">
-              <div><span class="price-value">{cena}&nbsp;Kč</span><span class="price-sub">vč. DPH</span></div>
+              <div><span class="price-value">{cena}&nbsp;Kč</span></div>
               <div class="arrow" aria-hidden="true">&rarr;</div>
             </div>
           </div>
@@ -1716,6 +1736,13 @@ def main():
         apt["cena_kc_m2"] = cena_info["cena_kc_m2"]
         apt["cena_terasy_kc"] = cena_info.get("cena_terasy_kc")
         apt["cena_balkonu_kc"] = cena_info.get("cena_balkonu_kc")
+
+        # Sloučená cena (byt + venkov) + blended Kč/m² ze součtu obou ploch
+        cena_venkov = (apt.get("cena_terasy_kc") or 0) + (apt.get("cena_balkonu_kc") or 0)
+        apt["cena_kc_celkem"] = apt["cena_kc"] + cena_venkov
+        plocha_venkov = apt["extra"]["plocha"] if apt.get("extra") else 0.0
+        apt["plocha_celkem"] = apt["plocha"] + plocha_venkov
+        apt["cena_kc_m2_zobrazit"] = round(apt["cena_kc_celkem"] / apt["plocha_celkem"])
 
     # Načíst statusy a injektovat je do APARTMENTS
     statuses = load_statuses()
