@@ -19,7 +19,19 @@ SITE_URL = "https://dumnetusil.cz"  # mění se jen tady
 # STATUS bytů — načítané ze status.json
 # ---------------------------------------------------------------------------
 
-ALLOWED_STATUSES = {"k dispozici", "rezervovano", "prodano"}
+# Interní klíče statusu (používané v CSS třídách, HTML data-attributech a v Python logice).
+# Interně zůstávají ASCII, aby se předešlo možným bugům v CSS/HTML.
+# V status.json ale user zadává přirozeně česky s diakritikou (viz STATUS_ALIASES níže).
+INTERNAL_STATUSES = {"k dispozici", "rezervovano", "prodano"}
+
+# Aliasy: uživatelské tvary v status.json → interní ASCII klíč
+STATUS_ALIASES = {
+    "k dispozici": "k dispozici",
+    "rezervováno": "rezervovano",   # preferovaný český tvar
+    "rezervovano": "rezervovano",   # backward-compat (bez diakritiky)
+    "prodáno": "prodano",           # preferovaný český tvar
+    "prodano": "prodano",           # backward-compat (bez diakritiky)
+}
 
 STATUS_META = {
     "k dispozici": {
@@ -47,7 +59,7 @@ STATUS_META = {
 
 
 def load_statuses() -> dict:
-    """Načti status.json, validuj hodnoty."""
+    """Načti status.json, validuj hodnoty (přijímá české tvary i ASCII varianty)."""
     status_file = Path(__file__).parent / "status.json"
     if not status_file.exists():
         print(f"⚠ status.json nenalezen — všechny byty 'k dispozici'", file=sys.stderr)
@@ -56,12 +68,15 @@ def load_statuses() -> dict:
     data = json.loads(status_file.read_text())
     byty = data.get("byty", {})
 
-    # Validace
+    # Validace a normalizace: povolené vstupy jsou české (i ASCII) tvary; ukládáme interní ASCII klíč
     errors = []
     for aid, info in byty.items():
-        s = info.get("status", "")
-        if s not in ALLOWED_STATUSES:
-            errors.append(f"  byt {aid}: neznámý status '{s}' (povoleno: {', '.join(ALLOWED_STATUSES)})")
+        raw = info.get("status", "")
+        if raw not in STATUS_ALIASES:
+            povolene = "k dispozici, rezervováno, prodáno"
+            errors.append(f"  byt {aid}: neznámý status '{raw}' (povoleno: {povolene})")
+        else:
+            info["status"] = STATUS_ALIASES[raw]  # normalizace na interní ASCII klíč
     if errors:
         print("✗ Chyba ve status.json:", file=sys.stderr)
         print("\n".join(errors), file=sys.stderr)
@@ -811,8 +826,6 @@ APT_PAGE_CSS = dedent("""
 .next-btn:hover{background:var(--accent-dark);color:#fff}
 
 /* Status — hero stamp + price card */
-.hero-img .status-stamp{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-10deg);z-index:3;color:#fff;font-family:var(--serif);font-size:4.5rem;font-weight:600;letter-spacing:.08em;padding:18px 56px;border:6px solid #fff;background:rgba(107,32,32,.94);text-shadow:0 2px 12px rgba(0,0,0,.4);pointer-events:none}
-.hero-img .status-stamp-reserved{background:rgba(184,84,43,.94)}
 .hero-img.status-prodano{filter:saturate(.7)}
 .hero-img .breadcrumb .status-badge{display:inline-block;background:rgba(255,255,255,.95);padding:3px 10px;border-radius:999px;font-weight:700;letter-spacing:.08em;margin-left:6px}
 .hero-img .breadcrumb .status-badge.status-k-dispozici{color:#3a7c4c}
@@ -857,11 +870,6 @@ def render_apt_page(apt: dict) -> str:
     cta_class = "btn btn-accent" if not cta_disabled else "btn btn-accent btn-disabled"
     cta_aria = ' aria-disabled="true"' if cta_disabled else ""
     status_class = status.replace(" ", "-")  # "k dispozici" → "k-dispozici"
-    sold_overlay = ""
-    if status == "prodano":
-        sold_overlay = '<div class="status-stamp">PRODÁNO</div>'
-    elif status == "rezervovano":
-        sold_overlay = '<div class="status-stamp status-stamp-reserved">REZERVOVÁNO</div>'
 
     # Rozdělit místnosti — interní (do součtu) vs venkovní (balkón/terasa pod součtem)
     internal_rooms = [(n, a) for n, a in apt["rooms"] if not any(k in n.lower() for k in ("balk", "teras"))]
@@ -949,7 +957,6 @@ def render_apt_page(apt: dict) -> str:
 </nav>
 
 <section class="hero-img status-{status_class}" id="hero" style="background-image:url('../img/vizualizace/{apt['hero_img']}')" role="img" aria-label="Vizualizace bytu {aid}">
-  {sold_overlay}
   <div class="label">
     <div class="wrap">
       <div>
@@ -1186,8 +1193,6 @@ section{padding:120px 0;position:relative}
 .card-apt.status-prodano:hover{transform:none;box-shadow:none;border-color:var(--line);cursor:default}
 .card-apt.status-rezervovano:hover{transform:translateY(-3px)}
 
-.card-stamp{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-12deg);z-index:5;color:#fff;font-family:var(--serif);font-size:2.6rem;font-weight:600;letter-spacing:.08em;padding:14px 36px;border:4px solid #fff;background:rgba(107,32,32,.92);text-shadow:0 2px 8px rgba(0,0,0,.35);pointer-events:none}
-.card-stamp.card-stamp-reserved{background:rgba(184,84,43,.92)}
 
 /* Filtr status */
 .filter-status{margin-top:0;margin-bottom:40px}
@@ -1273,18 +1278,12 @@ def render_index(apartments: list[dict]) -> str:
         smeta = STATUS_META[status]
         status_label = smeta["label"]
         # Status overlay (sold/reserved)
-        status_overlay = ""
-        if status == "prodano":
-            status_overlay = '<div class="card-stamp">PRODÁNO</div>'
-        elif status == "rezervovano":
-            status_overlay = '<div class="card-stamp card-stamp-reserved">REZERVOVÁNO</div>'
 
         cards_html.append(dedent(f"""
         <a class="card-apt status-{status_class}" href="byty/byt-{apt['id']}.html"
            data-dispozice="{_escape(apt['dispozice'])}"
            data-patro="{_escape(apt['patro_short'])}"
            data-status="{status_class}">
-          {status_overlay}
           <div class="thumb" style="background-image:linear-gradient(180deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.45) 100%),url('img/vizualizace/{apt['hero_img']}')">
             <span class="tag">{_escape(apt['tag'])}</span>
             <span class="status-badge status-{status_class}">{status_label}</span>

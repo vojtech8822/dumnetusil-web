@@ -122,8 +122,6 @@ section{padding:120px 0;position:relative}
 .card-apt.status-prodano:hover{transform:none;box-shadow:none;border-color:var(--line);cursor:default}
 .card-apt.status-rezervovano:hover{transform:translateY(-3px)}
 
-.card-stamp{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-12deg);z-index:5;color:#fff;font-family:var(--serif);font-size:2.6rem;font-weight:600;letter-spacing:.08em;padding:14px 36px;border:4px solid #fff;background:rgba(107,32,32,.92);text-shadow:0 2px 8px rgba(0,0,0,.35);pointer-events:none}
-.card-stamp.card-stamp-reserved{background:rgba(184,84,43,.92)}
 
 /* Filtr status */
 .filter-status{margin-top:0;margin-bottom:40px}
@@ -284,8 +282,6 @@ section{padding:120px 0;position:relative}
 .next-btn:hover{background:var(--accent-dark);color:#fff}
 
 /* Status — hero stamp + price card */
-.hero-img .status-stamp{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-10deg);z-index:3;color:#fff;font-family:var(--serif);font-size:4.5rem;font-weight:600;letter-spacing:.08em;padding:18px 56px;border:6px solid #fff;background:rgba(107,32,32,.94);text-shadow:0 2px 12px rgba(0,0,0,.4);pointer-events:none}
-.hero-img .status-stamp-reserved{background:rgba(184,84,43,.94)}
 .hero-img.status-prodano{filter:saturate(.7)}
 .hero-img .breadcrumb .status-badge{display:inline-block;background:rgba(255,255,255,.95);padding:3px 10px;border-radius:999px;font-weight:700;letter-spacing:.08em;margin-left:6px}
 .hero-img .breadcrumb .status-badge.status-k-dispozici{color:#3a7c4c}
