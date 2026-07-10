@@ -976,8 +976,8 @@ def render_apt_page(apt: dict) -> str:
   <div class="wrap">
     <p>{_escape(apt['lead'])}</p>
     <div class="price-mini">
-      <div class="label">Kupní cena{cena_label_extra}</div>
-      <div class="amount">{cena_str}&nbsp;Kč</div>
+      <div class="label">{'Prodejní cena' if status == 'prodano' else 'Kupní cena'}{cena_label_extra}</div>
+      <div class="amount {'amount-sold' if status == 'prodano' else ''}">{cena_str}&nbsp;Kč</div>
       <div class="sub">{cena_m2_str} Kč/m²{kc_m2_pozn}</div>
     </div>
   </div>
@@ -1030,7 +1030,7 @@ def render_apt_page(apt: dict) -> str:
             <tr><td>Konstrukce stěn</td><td>Cihelné tvarovky HELUZ</td></tr>
             <tr><td>Zateplení</td><td>Minerální vata</td></tr>
             <tr><td>Patro</td><td>{_escape(apt['patro'])}</td></tr>
-            <tr><td>Stav</td><td>K dispozici</td></tr>
+            <tr><td>Stav</td><td>{status_label}</td></tr>
             <tr><td>Předání</td><td>Q3 2027</td></tr>
           </table>
         </div>
