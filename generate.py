@@ -717,7 +717,7 @@ def _footer_html(base: str = "") -> str:
           <p>BH projects &amp; development s.r.o.<br>Mezírka 775/1, Veveří, 602 00 Brno<br>IČ: 22340432 · DIČ: CZ22340432</p>
         </div>
         <div class="legal">
-          © {date.today().year} BH projects &amp; development s.r.o. · Dům Netušil. Vizualizace jsou ilustrativní. Ceny uvedené na webu jsou v Kč včetně DPH.
+          © {date.today().year} BH projects &amp; development s.r.o. · Dům Netušil. Vizualizace jsou ilustrativní. Ceny uvedené na webu jsou v Kč včetně DPH (12 %).
           <span style="margin:0 8px">·</span>
           <a href="{base}ochrana-osobnich-udaju.html" style="color:rgba(255,255,255,.7);border-bottom:1px solid rgba(255,255,255,.3)">Ochrana osobních údajů</a>
         </div>
