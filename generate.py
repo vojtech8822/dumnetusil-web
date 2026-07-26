@@ -125,17 +125,19 @@ APARTMENTS = [
         "id": "01", "patro": "1.NP", "patro_short": "1.NP",
         "dispozice": "2+kk", "plocha": 44.11,
         "extra": {"typ": "terasa", "plocha": 25.0, "popis": "Terasa 25 m²"},
-        "tag": "S terasou",
-        "headline": "2+kk se soukromou terasou",
-        "headline_html": '2+kk <em>se soukromou</em><br>terasou do vnitrobloku',
-        "lead": ("Největší byt v přízemí s privátní 25m² terasou orientovanou do klidného "
-                 "vnitrobloku. Vlastní zelený prostor pro rána u kávy i letní večeře — "
-                 "vzácnost v centru Brna."),
+        "tag": "Terasa a předzahrádka",
+        "headline": "2+kk se soukromou předzahrádkou a terasou",
+        "headline_html": '2+kk <em>se soukromou</em><br>předzahrádkou a terasou',
+        "lead": ("Největší byt v přízemí s privátní 25m² terasou a vlastní předzahrádkou "
+                 "orientovanou do klidného vnitrobloku. Vlastní zelený prostor pro rána u kávy "
+                 "i letní večeře — vzácnost v centru Brna."),
         "description": ("Byt 01 je nejlukrativnější jednotka v přízemí — kombinace 2+kk "
-                        "s vlastní 25m² terasou, která se otevírá do tichého vnitrobloku. "
+                        "s vlastní 25m² terasou a soukromou předzahrádkou, které se otevírají "
+                        "do tichého vnitrobloku. "
                         "Obývací pokoj s kuchyňským koutem (24,87 m²) je centrálním prostorem "
                         "bytu, ložnice nabízí klidné zázemí pro spánek.\n\n"
-                        "Pro lidi, kteří chtějí v centru Brna vlastní venkovní prostor — "
+                        "Pro lidi, kteří chtějí v centru Brna vlastní venkovní prostor s terasou "
+                        "i předzahrádkou — "
                         "rodinu, pár se psem nebo investory cílící na prémiový nájem."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "24,87 m²"),
@@ -228,8 +230,8 @@ APARTMENTS = [
         "dispozice": "2+kk", "plocha": 43.27,
         "extra": {"typ": "balkón", "plocha": 5.71, "popis": "Balkón 5,71 m²"},
         "tag": "S balkonem",
-        "headline": "2+kk s balkonem",
-        "headline_html": '2+kk <em>s balkonem</em><br>do klidného vnitrobloku',
+        "headline": "2+kk s balkónem do tichého vnitrobloku",
+        "headline_html": '2+kk <em>s balkónem</em><br>do tichého vnitrobloku',
         "lead": ("Dvoupokojový byt s balkonem do klidného vnitrobloku ve druhém patře. "
                  "Nejvyhledávanější dispozice v domě — pro startovní bydlení i malou rodinu."),
         "description": ("Byt 04 je klasický 2+kk s vlastním balkonem — dispozice, kterou hledá "
@@ -252,8 +254,8 @@ APARTMENTS = [
             "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
         ],
-        "images": ["2np-2kk.jpg", "2np-loznice-2kk.jpg", "ext-4.jpg"],
-        "hero_img": "2np-2kk.jpg",
+        "images": ["2np-loznice-2kk.jpg", "2np-2kk.jpg", "ext-4.jpg"],
+        "hero_img": "2np-loznice-2kk.jpg",
         "thumb_gradient": "linear-gradient(135deg,#b8a384,#8a724f)",
         "next_id": "05",
     },
@@ -261,7 +263,7 @@ APARTMENTS = [
         "id": "05", "patro": "2.NP", "patro_short": "2.NP",
         "dispozice": "1+kk", "plocha": 24.22,
         "extra": None,
-        "tag": "Do ulice",
+        "tag": "Vhodný pro investory",
         "headline": "1+kk s pohledem do ulice",
         "headline_html": '1+kk <em>kompaktní</em><br>orientovaný do ulice',
         "lead": ("Kompaktní 1+kk orientovaný do ulice ve druhém patře. Nejmenší a nejdostupnější "
@@ -291,23 +293,23 @@ APARTMENTS = [
         "id": "06", "patro": "2.NP", "patro_short": "2.NP",
         "dispozice": "1+kk", "plocha": 25.11,
         "extra": None,
-        "tag": "Do vnitrobloku",
-        "headline": "1+kk do tichého vnitrobloku",
-        "headline_html": '1+kk <em>s tichým výhledem</em><br>do vnitrobloku',
-        "lead": ("Kompaktní 1+kk s výhledem do klidného vnitrobloku ve druhém patře. "
-                 "Optimální poměr velikosti, klidu a ceny."),
-        "description": ("Byt 06 je 1+kk orientovaný do vnitrobloku — klid, který v centru "
-                        "Brna nenajdete často. Otevřený obývák s kuchyňským koutem (16,11 m²), "
+        "tag": "Vhodný pro investory",
+        "headline": "1+kk vhodný pro investory",
+        "headline_html": '1+kk <em>vhodný</em><br>pro investory',
+        "lead": ("Kompaktní 1+kk orientovaný do ulice ve druhém patře. "
+                 "Optimální poměr velikosti a ceny."),
+        "description": ("Byt 06 je 1+kk orientovaný do ulice ve druhém patře historického "
+                        "měšťanského domu. Otevřený obývák s kuchyňským koutem (16,11 m²), "
                         "samostatná koupelna a předsíň.\n\n"
-                        "Vhodný pro člověka, který chce klid v centru — workout brain, "
-                        "telework nebo prostě klidné bydlení."),
+                        "Vhodný pro investora cílícího na pronájem studentům a mladým "
+                        "profesionálům — nejlikvidnější velikost bytu v Husovicích."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "16,11 m²"),
             ("Koupelna + WC", "~4 m²"),
             ("Předsíň", "~5 m²"),
         ],
         "features": [
-            "Orientace do tichého vnitrobloku",
+            "Orientace do ulice s historickou fasádou",
             "Otevřená dispozice obývák + KK",
             "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
@@ -322,11 +324,11 @@ APARTMENTS = [
         "dispozice": "1+kk", "plocha": 25.64,
         "extra": {"typ": "balkón", "plocha": 4.45, "popis": "Balkón 4,45 m²"},
         "tag": "Vhodný pro investory",
-        "headline": "1+kk s balkonem ve 3.NP",
-        "headline_html": '1+kk <em>s balkonem</em><br>vhodný pro investora',
+        "headline": "1+kk s balkónem do tichého vnitrobloku",
+        "headline_html": '1+kk <em>s balkónem</em><br>do tichého vnitrobloku',
         "lead": ("Kompaktní 1+kk s balkonem do vnitrobloku. Nejlikvidnější velikost "
                  "pro pronájem v Brně — studenti MU i mladí profesionálové."),
-        "description": ("Byt 07 je 1+kk se balkonem ve třetím patře — vyšší patro = více "
+        "description": ("Byt 07 je 1+kk s balkonem ve třetím patře — vyšší patro = více "
                         "světla a klidu od ulice. Otevřený obývák s kuchyňským koutem "
                         "(16,20 m²), balkon 4,45 m² do vnitrobloku.\n\n"
                         "Velmi atraktivní investiční byt v domě podle analýzy nájemného trhu — "
@@ -355,8 +357,8 @@ APARTMENTS = [
         "dispozice": "2+kk", "plocha": 43.27,
         "extra": {"typ": "balkón", "plocha": 5.71, "popis": "Balkón 5,71 m²"},
         "tag": "S balkonem",
-        "headline": "2+kk s balkonem ve 3.NP",
-        "headline_html": '2+kk <em>s balkonem</em><br>ve vyšším patře',
+        "headline": "2+kk s balkónem do tichého vnitrobloku",
+        "headline_html": '2+kk <em>s balkónem</em><br>do tichého vnitrobloku',
         "lead": ("Dvoupokojový byt v třetím patře s balkonem do klidného vnitrobloku. "
                  "Klid s výškou — světlo a ticho jdou ruku v ruce."),
         "description": ("Byt 08 je 2+kk se vším co od bytu očekáváte — velký obývák s KK "
@@ -377,8 +379,8 @@ APARTMENTS = [
             "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
         ],
-        "images": ["2np-2kk.jpg", "2np-loznice-2kk.jpg", "ext-4.jpg"],
-        "hero_img": "2np-2kk.jpg",
+        "images": ["4np-loznice-2kk.jpg", "2np-2kk.jpg", "ext-4.jpg"],
+        "hero_img": "4np-loznice-2kk.jpg",
         "thumb_gradient": "linear-gradient(135deg,#a89473,#7a6442)",
         "next_id": "09",
     },
@@ -386,7 +388,7 @@ APARTMENTS = [
         "id": "09", "patro": "3.NP", "patro_short": "3.NP",
         "dispozice": "1+kk", "plocha": 24.22,
         "extra": None,
-        "tag": "Do ulice",
+        "tag": "Vhodný pro investory",
         "headline": "1+kk s historickou fasádou",
         "headline_html": '1+kk <em>v 3. patře</em><br>s pohledem do ulice',
         "lead": ("Kompaktní 1+kk ve třetím patře s okny do ulice. Vyšší patro — "
@@ -449,8 +451,8 @@ APARTMENTS = [
         "dispozice": "2+kk", "plocha": 43.57,
         "extra": {"typ": "balkón", "plocha": 7.26, "popis": "Balkón 7,26 m²"},
         "tag": "S balkonem 7,26 m²",
-        "headline": "2+kk s největším balkonem v domě",
-        "headline_html": 'Podkrovní 2+kk <em>s největším</em><br>balkonem v domě',
+        "headline": "2+kk s největším balkónem do vnitrobloku",
+        "headline_html": '2+kk <em>s největším balkónem</em><br>do vnitrobloku',
         "lead": ("2+kk s největším balkonem v domě (7,26 m²) ve 4. patře. Velký obývák, "
                  "oddělená ložnice, sluníčko shora od podkroví. Nejvyšší kvalita světla."),
         "description": ("Byt 11 je 2+kk ve 4. patře s největším balkonem v celém domě (7,26 m²) "
@@ -513,14 +515,14 @@ APARTMENTS = [
         "dispozice": "1+kk", "plocha": 25.11,
         "extra": None,
         "tag": "Nejvyšší patro",
-        "headline": "1+kk ve 4. NP do tichého vnitrobloku",
-        "headline_html": '1+kk <em>v nejvyšším patře</em><br>s klidem vnitrobloku',
-        "lead": ("1+kk ve čtvrtém patře s výhledem do vnitrobloku. Maximum klidu a světla."),
-        "description": ("Byt 13 je 1+kk ve čtvrtém patře orientovaný do tichého vnitrobloku — "
-                        "kombinace, kterou v centru města jen málokdo nabídne. Otevřený obývák "
+        "headline": "1+kk vhodný pro investory",
+        "headline_html": '1+kk <em>vhodný</em><br>pro investory',
+        "lead": ("1+kk ve čtvrtém patře orientovaný do ulice. Maximum světla ve vyšším patře."),
+        "description": ("Byt 13 je 1+kk ve čtvrtém patře orientovaný do ulice — vyšší patro "
+                        "znamená lepší světlo a odstup od bezprostředního ruchu. Otevřený obývák "
                         "s KK (16,11 m²), samostatná koupelna a předsíň.\n\n"
-                        "Pro toho, kdo prioritizuje klid v centru — práci z domova, "
-                        "tichý spánek, oddálení od ruchu."),
+                        "Vyhledávaná velikost ve vyšším patře — investiční jednotka "
+                        "i kompaktní startovní bydlení v centru."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "16,11 m²"),
             ("Koupelna + WC", "~4 m²"),
@@ -528,7 +530,7 @@ APARTMENTS = [
         ],
         "features": [
             "4. NP — vyšší patro",
-            "Orientace do tichého vnitrobloku",
+            "Orientace do ulice — pohled na historickou fasádu",
             "Otevřená dispozice obývák + KK",
             "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
@@ -1031,7 +1033,7 @@ def render_apt_page(apt: dict) -> str:
             <tr><td>Zateplení</td><td>Minerální vata</td></tr>
             <tr><td>Patro</td><td>{_escape(apt['patro'])}</td></tr>
             <tr><td>Stav</td><td>{status_label}</td></tr>
-            <tr><td>Předání</td><td>Q3 2027</td></tr>
+            <tr><td>Předání</td><td>Q1 2028</td></tr>
           </table>
         </div>
       </div>
@@ -1311,7 +1313,7 @@ def render_index(apartments: list[dict]) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Dům Netušil — 14 komorních bytů 1+kk a 2+kk v historickém měšťanském domě v centru Brna-Husovic. Zdobná fasáda, tepelné čerpadlo, zelená střecha. Předání 3. čtvrtletí 2027.">
+<meta name="description" content="Dům Netušil — 14 komorních bytů 1+kk a 2+kk v historickém měšťanském domě v centru Brna-Husovic. Zdobná fasáda, tepelné čerpadlo, zelená střecha. Předání 1. čtvrtletí 2028.">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
@@ -1362,7 +1364,7 @@ def render_index(apartments: list[dict]) -> str:
       <div><strong>14</strong><span>Bytů 1+kk a 2+kk</span></div>
       <div><strong>24–60 m²</strong><span>Výměra jednotek</span></div>
       <div><strong>Památková zóna</strong><span>Historická fasáda</span></div>
-      <div><strong>Q3 2027</strong><span>Plánované dokončení</span></div>
+      <div><strong>Q1 2028</strong><span>Plánované dokončení</span></div>
     </div>
   </div>
 </header>
@@ -1427,7 +1429,7 @@ def render_index(apartments: list[dict]) -> str:
         <div class="stat-row"><span>Energetická třída</span><strong>B (předpokl.)</strong></div>
         <div class="stat-row"><span>Konstrukce</span><strong>HELUZ Family + AKU</strong></div>
         <div class="stat-row"><span>Střecha</span><strong>Zelená, extenzivní</strong></div>
-        <div class="stat-row"><span>Předání</span><strong>3. čtvrtletí 2027</strong></div>
+        <div class="stat-row"><span>Předání</span><strong>1. čtvrtletí 2028</strong></div>
       </div>
     </div>
   </div>
