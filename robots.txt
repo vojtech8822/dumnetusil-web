@@ -3,4 +3,4 @@ Allow: /
 Disallow: /generate.py
 Disallow: /*.md
 
-Sitemap: https://dumnetusil.cz/sitemap.xml
+Sitemap: https://www.dumnetusil.cz/sitemap.xml

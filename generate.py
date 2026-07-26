@@ -13,7 +13,47 @@ from datetime import date
 from pathlib import Path
 from textwrap import dedent
 
-SITE_URL = "https://dumnetusil.cz"  # mění se jen tady
+SITE_URL = "https://www.dumnetusil.cz"  # mění se jen tady
+DOKONCENI = "Q1 2028"  # termín dokončení — jediné místo, kde se mění
+
+# ---------------------------------------------------------------------------
+# Cache-busting: ?v=<hash obsahu> u lokálních assetů (CSS/JS/obrázky).
+# GitHub Pages cachuje 10 min přes CDN — s verzí v URL se změny projeví ihned.
+# ---------------------------------------------------------------------------
+import hashlib as _hashlib
+import re as _re
+
+_ASSET_HASH_CACHE: dict = {}
+
+def _asset_hash(root: Path, rel: str) -> str | None:
+    if rel in _ASSET_HASH_CACHE:
+        return _ASSET_HASH_CACHE[rel]
+    p = root / rel
+    h = _hashlib.md5(p.read_bytes()).hexdigest()[:8] if p.exists() else None
+    _ASSET_HASH_CACHE[rel] = h
+    return h
+
+_ASSET_RE = _re.compile(
+    r'(href|src)="((?:\.\./|/)?(?:img/[^"?]+\.(?:png|jpe?g|webp|svg)|styles\.css|script\.js))"'
+)
+_ASSET_URL_RE = _re.compile(
+    r"url\('((?:\.\./|/)?img/[^'?]+\.(?:png|jpe?g|webp|svg))'\)"
+)
+
+def _rel_of(path: str) -> str:
+    rel = path.lstrip("/")
+    return rel[3:] if rel.startswith("../") else rel
+
+def bust_assets(html_text: str, root: Path) -> str:
+    def repl(m):
+        attr, path = m.group(1), m.group(2)
+        h = _asset_hash(root, _rel_of(path))
+        return f'{attr}="{path}?v={h}"' if h else m.group(0)
+    def repl_url(m):
+        path = m.group(1)
+        h = _asset_hash(root, _rel_of(path))
+        return f"url('{path}?v={h}')" if h else m.group(0)
+    return _ASSET_URL_RE.sub(repl_url, _ASSET_RE.sub(repl, html_text))
 
 # ---------------------------------------------------------------------------
 # STATUS bytů — načítané ze status.json
@@ -142,8 +182,8 @@ APARTMENTS = [
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "24,87 m²"),
             ("Ložnice", "10,20 m²"),
-            ("Koupelna + WC", "~4 m²"),
-            ("Předsíň", "~5 m²"),
+            ("Koupelna + WC", "3,26 m²"),
+            ("Bytová předsíň", "3,85 m²"),
             ("Terasa (privátní)", "25,00 m²"),
         ],
         "features": [
@@ -178,8 +218,8 @@ APARTMENTS = [
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "17,58 m²"),
             ("Ložnice", "9,81 m²"),
-            ("Koupelna + WC", "~4 m²"),
-            ("Předsíň", "~5 m²"),
+            ("Koupelna + WC", "3,35 m²"),
+            ("Bytová předsíň", "4,41 m²"),
         ],
         "features": [
             "Orientace do ulice s historickou fasádou",
@@ -209,8 +249,8 @@ APARTMENTS = [
                         "menší investiční jednotka pro dlouhodobý pronájem."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "16,20 m²"),
-            ("Koupelna + WC", "~4 m²"),
-            ("Předsíň", "~5 m²"),
+            ("Koupelna + WC", "4,83 m²"),
+            ("Bytová předsíň", "3,71 m²"),
             ("Balkón", "4,45 m²"),
         ],
         "features": [
@@ -243,8 +283,8 @@ APARTMENTS = [
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "20,59 m²"),
             ("Ložnice", "11,83 m²"),
-            ("Koupelna + WC", "~4 m²"),
-            ("Předsíň", "~5 m²"),
+            ("Koupelna + WC", "4,08 m²"),
+            ("Bytová předsíň", "5,41 m²"),
             ("Balkón", "5,71 m²"),
         ],
         "features": [
@@ -274,8 +314,8 @@ APARTMENTS = [
                         "na pronájem studentům nebo mladým profesionálům v Husovicích."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "16,09 m²"),
-            ("Koupelna + WC", "~4 m²"),
-            ("Předsíň", "~5 m²"),
+            ("Koupelna + WC", "4,44 m²"),
+            ("Bytová předsíň", "2,94 m²"),
         ],
         "features": [
             "Orientace do ulice s historickou fasádou",
@@ -305,8 +345,8 @@ APARTMENTS = [
                         "profesionálům — nejlikvidnější velikost bytu v Husovicích."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "16,11 m²"),
-            ("Koupelna + WC", "~4 m²"),
-            ("Předsíň", "~5 m²"),
+            ("Koupelna + WC", "4,36 m²"),
+            ("Bytová předsíň", "3,77 m²"),
         ],
         "features": [
             "Orientace do ulice s historickou fasádou",
@@ -336,8 +376,8 @@ APARTMENTS = [
                         "za nájem."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "16,20 m²"),
-            ("Koupelna + WC", "~4 m²"),
-            ("Předsíň", "~5 m²"),
+            ("Koupelna + WC", "4,83 m²"),
+            ("Bytová předsíň", "3,71 m²"),
             ("Balkón", "4,45 m²"),
         ],
         "features": [
@@ -368,8 +408,8 @@ APARTMENTS = [
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "18,22 m²"),
             ("Ložnice", "10,54 m²"),
-            ("Koupelna + WC", "~4 m²"),
-            ("Předsíň", "~5 m²"),
+            ("Koupelna + WC", "4,83 m²"),
+            ("Bytová předsíň", "4,95 m²"),
             ("Balkón", "5,71 m²"),
         ],
         "features": [
@@ -400,8 +440,8 @@ APARTMENTS = [
                         "historické fasády vlastního domu je vzácnost."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "16,09 m²"),
-            ("Koupelna + WC", "~4 m²"),
-            ("Předsíň", "~5 m²"),
+            ("Koupelna + WC", "4,44 m²"),
+            ("Bytová předsíň", "2,94 m²"),
         ],
         "features": [
             "Orientace do ulice — pohled na historickou fasádu",
@@ -431,8 +471,8 @@ APARTMENTS = [
                         "tichá lokalita uprostřed města."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "16,11 m²"),
-            ("Koupelna + WC", "~4 m²"),
-            ("Předsíň", "~5 m²"),
+            ("Koupelna + WC", "4,36 m²"),
+            ("Bytová předsíň", "3,77 m²"),
         ],
         "features": [
             "Orientace do tichého vnitrobloku",
@@ -463,8 +503,8 @@ APARTMENTS = [
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "19,73 m²"),
             ("Ložnice", "13,23 m²"),
-            ("Koupelna + WC", "~4 m²"),
-            ("Předsíň", "~5 m²"),
+            ("Koupelna + WC", "3,96 m²"),
+            ("Bytová předsíň", "5,46 m²"),
             ("Balkón", "7,26 m²"),
         ],
         "features": [
@@ -495,8 +535,8 @@ APARTMENTS = [
                         "s prémiovým nájemným potenciálem."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "16,09 m²"),
-            ("Koupelna + WC", "~4 m²"),
-            ("Předsíň", "~5 m²"),
+            ("Koupelna + WC", "4,43 m²"),
+            ("Bytová předsíň", "2,94 m²"),
         ],
         "features": [
             "4. NP — výborné světlo a klid",
@@ -525,8 +565,8 @@ APARTMENTS = [
                         "i kompaktní startovní bydlení v centru."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "16,11 m²"),
-            ("Koupelna + WC", "~4 m²"),
-            ("Předsíň", "~5 m²"),
+            ("Koupelna + WC", "4,50 m²"),
+            ("Bytová předsíň", "3,77 m²"),
         ],
         "features": [
             "4. NP — vyšší patro",
@@ -547,26 +587,25 @@ APARTMENTS = [
         "tag": "Podkroví · Top byt",
         "headline": "Podkrovní 2+kk se šatnou",
         "headline_html": 'Podkrovní 2+kk <em>největší</em><br>byt v domě se šatnou',
-        "lead": ("Největší jednotka v domě (60,21 m²). Velkorysý obývák s KK, samostatná ložnice, "
-                 "šatna, koupelna a galerie. Sluneční světlo shora, atmosféra podkroví."),
+        "lead": ("Největší jednotka v domě (60,21 m²). Velkorysý obývák s KK, spací galerie, "
+                 "prostorná hala, šatna a koupelna. Sluneční světlo shora, atmosféra podkroví."),
         "description": ("Byt 14 je vlajková loď projektu — největší jednotka v domě (60,21 m²) v podkroví. "
-                        "Velkorysý obývák s kuchyňským koutem (27,39 m²), samostatná ložnice, šatna a koupelna. "
+                        "Velkorysý obývák s kuchyňským koutem (27,39 m²), spací galerie (10,88 m²), prostorná hala, šatna a koupelna. "
                         "Atmosféra šikmých stropů, světlo přicházející shora, vyhlídka do okolí.\n\n"
                         "Pro pár nebo malou rodinu, která si v centru Brna chce dopřát výjimečně velkorysý byt "
                         "s prémiovou podkrovní atmosférou."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "27,39 m²"),
-            ("Hala", "~6 m²"),
-            ("Galerie", "~10 m²"),
+            ("Galerie", "10,88 m²"),
+            ("Hala", "9,96 m²"),
+            ("Koupelna + WC", "6,24 m²"),
             ("Šatna", "3,61 m²"),
-            ("Ložnice", "~10 m²"),
-            ("Koupelna + WC", "~4 m²"),
         ],
         "features": [
             "Největší byt v domě (60,21 m²)",
             "Podkrovní atmosféra — šikmé stropy",
             "Vlastní šatna",
-            "Galerie nad obývákem",
+            "Spací galerie (10,88 m²)",
             "Maximální množství světla shora",
             "K dispozici — vlajková loď projektu",
         ],
@@ -937,6 +976,7 @@ def render_apt_page(apt: dict) -> str:
 <meta property="og:url" content="{SITE_URL}/byty/byt-{aid}.html">
 <meta property="og:image" content="{SITE_URL}/img/vizualizace/{apt['hero_img']}">
 <meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Dům Netušil">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
@@ -1033,7 +1073,7 @@ def render_apt_page(apt: dict) -> str:
             <tr><td>Zateplení</td><td>Minerální vata</td></tr>
             <tr><td>Patro</td><td>{_escape(apt['patro'])}</td></tr>
             <tr><td>Stav</td><td>{status_label}</td></tr>
-            <tr><td>Předání</td><td>Q1 2028</td></tr>
+            <tr><td>Předání</td><td>{DOKONCENI}</td></tr>
           </table>
         </div>
       </div>
@@ -1313,7 +1353,7 @@ def render_index(apartments: list[dict]) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Dům Netušil — 14 komorních bytů 1+kk a 2+kk v historickém měšťanském domě v centru Brna-Husovic. Zdobná fasáda, tepelné čerpadlo, zelená střecha. Předání 1. čtvrtletí 2028.">
+<meta name="description" content="Dům Netušil — 14 komorních bytů 1+kk a 2+kk v historickém měšťanském domě v centru Brna-Husovic. Zdobná fasáda, tepelné čerpadlo, zelená střecha. Předání {DOKONCENI}.">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
@@ -1328,6 +1368,25 @@ def render_index(apartments: list[dict]) -> str:
 <meta property="og:url" content="{SITE_URL}/">
 <meta property="og:image" content="{SITE_URL}/img/vizualizace/ext-1.jpg">
 <meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Dům Netušil">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dům Netušil — 14 komorních bytů v centru Brna-Husovic">
+<meta name="twitter:description" content="Nové byty 1+kk a 2+kk v historickém měšťanském domě. Zdobná fasáda, tepelné čerpadlo, zelená střecha.">
+<meta name="twitter:image" content="{SITE_URL}/img/vizualizace/ext-1.jpg">
+
+<script type="application/ld+json">
+{{"@context": "https://schema.org",
+ "@type": "ApartmentComplex",
+ "name": "Dům Netušil",
+ "url": "{SITE_URL}/",
+ "description": "14 komorních bytů 1+kk a 2+kk v historickém měšťanském domě v Brně-Husovicích. Předání {DOKONCENI}.",
+ "numberOfAccommodationUnits": 14,
+ "address": {{"@type": "PostalAddress", "streetAddress": "Netušilova 712/15", "addressLocality": "Brno-Husovice", "postalCode": "61400", "addressCountry": "CZ"}},
+ "email": "info@dumnetusil.cz",
+ "telephone": "+420605201450",
+ "image": "{SITE_URL}/img/vizualizace/ext-1.jpg"}}
+</script>
 
 <title>Dům Netušil — 14 komorních bytů v historickém domě Brno-Husovice</title>
 <link rel="preload" as="image" href="img/vizualizace/ext-1.jpg">
@@ -1364,7 +1423,7 @@ def render_index(apartments: list[dict]) -> str:
       <div><strong>14</strong><span>Bytů 1+kk a 2+kk</span></div>
       <div><strong>24–60 m²</strong><span>Výměra jednotek</span></div>
       <div><strong>Památková zóna</strong><span>Historická fasáda</span></div>
-      <div><strong>Q1 2028</strong><span>Plánované dokončení</span></div>
+      <div><strong>{DOKONCENI}</strong><span>Plánované dokončení</span></div>
     </div>
   </div>
 </header>
@@ -1429,7 +1488,7 @@ def render_index(apartments: list[dict]) -> str:
         <div class="stat-row"><span>Energetická třída</span><strong>B (předpokl.)</strong></div>
         <div class="stat-row"><span>Konstrukce</span><strong>HELUZ Family + AKU</strong></div>
         <div class="stat-row"><span>Střecha</span><strong>Zelená, extenzivní</strong></div>
-        <div class="stat-row"><span>Předání</span><strong>1. čtvrtletí 2028</strong></div>
+        <div class="stat-row"><span>Předání</span><strong>{DOKONCENI}</strong></div>
       </div>
     </div>
   </div>
@@ -1651,6 +1710,7 @@ def render_404() -> str:
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta name="robots" content="noindex">
+<meta name="description" content="Stránka nebyla nalezena. Dům Netušil — 14 komorních bytů v Brně-Husovicích.">
 <title>Stránka nenalezena — Dům Netušil</title>
 <link rel="stylesheet" href="/styles.css">
 <style>
@@ -1761,10 +1821,10 @@ def main():
 
     # 14 podstránek
     for apt in APARTMENTS:
-        (byty_dir / f"byt-{apt['id']}.html").write_text(render_apt_page(apt))
+        (byty_dir / f"byt-{apt['id']}.html").write_text(bust_assets(render_apt_page(apt), root))
 
     # index.html
-    (root / "index.html").write_text(render_index(APARTMENTS))
+    (root / "index.html").write_text(bust_assets(render_index(APARTMENTS), root))
 
     # sitemap, robots, .htaccess
     (root / "sitemap.xml").write_text(render_sitemap())
@@ -1772,10 +1832,16 @@ def main():
     (root / ".htaccess").write_text(render_htaccess())
 
     # GitHub Pages soubory
-    (root / "404.html").write_text(render_404())
+    (root / "404.html").write_text(bust_assets(render_404(), root))
+
+    # Statická stránka ochrany osobních údajů — převerzovat assety (idempotentně)
+    gdpr = root / "ochrana-osobnich-udaju.html"
+    if gdpr.exists():
+        txt = _re.sub(r"\?v=[0-9a-f]{8}", "", gdpr.read_text())
+        gdpr.write_text(bust_assets(txt, root))
     (root / ".nojekyll").write_text("")  # Vypne Jekyll processing
     if not (root / "CNAME").exists():
-        (root / "CNAME").write_text("dumnetusil.cz\n")
+        (root / "CNAME").write_text("www.dumnetusil.cz\n")
     # Poznámka: .github/workflows/ NEGENERUJEME — náš workflow je
     # "edit v chatu → push hotovou verzi na Git", ne CI/CD.
 
