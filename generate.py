@@ -1068,7 +1068,7 @@ def render_apt_page(apt: dict) -> str:
           <h3>Technické parametry</h3>
           <table>
             <tr><td>Vytápění</td><td>Tepelné čerpadlo</td></tr>
-            <tr><td>Energetická třída</td><td>B (předpokládaná, finální PENB v procesu)</td></tr>
+            <tr><td>Energetická třída</td><td>B (dle zpracovaného PENB, 8/2026)</td></tr>
             <tr><td>Konstrukce stěn</td><td>Cihelné tvarovky HELUZ</td></tr>
             <tr><td>Zateplení</td><td>Minerální vata</td></tr>
             <tr><td>Patro</td><td>{_escape(apt['patro'])}</td></tr>
@@ -1485,7 +1485,7 @@ def render_index(apartments: list[dict]) -> str:
         <div class="stat-row"><span>Velikost jednotek</span><strong>24–60 m²</strong></div>
         <div class="stat-row"><span>Pater</span><strong>5 + podkroví</strong></div>
         <div class="stat-row"><span>Vytápění</span><strong>Tepelné čerpadlo</strong></div>
-        <div class="stat-row"><span>Energetická třída</span><strong>B (předpokl.)</strong></div>
+        <div class="stat-row"><span>Energetická třída</span><strong>B (PENB)</strong></div>
         <div class="stat-row"><span>Konstrukce</span><strong>HELUZ Family + AKU</strong></div>
         <div class="stat-row"><span>Střecha</span><strong>Zelená, extenzivní</strong></div>
         <div class="stat-row"><span>Předání</span><strong>{DOKONCENI}</strong></div>
