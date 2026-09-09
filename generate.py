@@ -236,7 +236,7 @@ APARTMENTS = [
     {
         "id": "03", "patro": "2.NP", "patro_short": "2.NP",
         "dispozice": "1+kk", "plocha": 25.64,
-        "extra": {"typ": "balkón", "plocha": 4.45, "popis": "Balkón 4,45 m²"},
+        "extra": {"typ": "balkon", "plocha": 4.45, "popis": "Balkón 4,45 m²"},
         "tag": "S balkonem",
         "headline": "1+kk s balkonem ve 2.NP",
         "headline_html": '1+kk <em>s balkonem</em><br>do vnitrobloku',
@@ -268,10 +268,10 @@ APARTMENTS = [
     {
         "id": "04", "patro": "2.NP", "patro_short": "2.NP",
         "dispozice": "2+kk", "plocha": 43.27,
-        "extra": {"typ": "balkón", "plocha": 5.71, "popis": "Balkón 5,71 m²"},
+        "extra": {"typ": "balkon", "plocha": 5.71, "popis": "Balkón 5,71 m²"},
         "tag": "S balkonem",
-        "headline": "2+kk s balkónem do tichého vnitrobloku",
-        "headline_html": '2+kk <em>s balkónem</em><br>do tichého vnitrobloku',
+        "headline": "2+kk s balkonem do tichého vnitrobloku",
+        "headline_html": '2+kk <em>s balkonem</em><br>do tichého vnitrobloku',
         "lead": ("Dvoupokojový byt s balkonem do klidného vnitrobloku ve druhém patře. "
                  "Nejvyhledávanější dispozice v domě — pro startovní bydlení i malou rodinu."),
         "description": ("Byt 04 je klasický 2+kk s vlastním balkonem — dispozice, kterou hledá "
@@ -362,10 +362,10 @@ APARTMENTS = [
     {
         "id": "07", "patro": "3.NP", "patro_short": "3.NP",
         "dispozice": "1+kk", "plocha": 25.64,
-        "extra": {"typ": "balkón", "plocha": 4.45, "popis": "Balkón 4,45 m²"},
+        "extra": {"typ": "balkon", "plocha": 4.45, "popis": "Balkón 4,45 m²"},
         "tag": "Vhodný pro investory",
-        "headline": "1+kk s balkónem do tichého vnitrobloku",
-        "headline_html": '1+kk <em>s balkónem</em><br>do tichého vnitrobloku',
+        "headline": "1+kk s balkonem do tichého vnitrobloku",
+        "headline_html": '1+kk <em>s balkonem</em><br>do tichého vnitrobloku',
         "lead": ("Kompaktní 1+kk s balkonem do vnitrobloku. Nejlikvidnější velikost "
                  "pro pronájem v Brně — studenti MU i mladí profesionálové."),
         "description": ("Byt 07 je 1+kk s balkonem ve třetím patře — vyšší patro = více "
@@ -395,10 +395,10 @@ APARTMENTS = [
     {
         "id": "08", "patro": "3.NP", "patro_short": "3.NP",
         "dispozice": "2+kk", "plocha": 43.27,
-        "extra": {"typ": "balkón", "plocha": 5.71, "popis": "Balkón 5,71 m²"},
+        "extra": {"typ": "balkon", "plocha": 5.71, "popis": "Balkón 5,71 m²"},
         "tag": "S balkonem",
-        "headline": "2+kk s balkónem do tichého vnitrobloku",
-        "headline_html": '2+kk <em>s balkónem</em><br>do tichého vnitrobloku',
+        "headline": "2+kk s balkonem do tichého vnitrobloku",
+        "headline_html": '2+kk <em>s balkonem</em><br>do tichého vnitrobloku',
         "lead": ("Dvoupokojový byt v třetím patře s balkonem do klidného vnitrobloku. "
                  "Klid s výškou — světlo a ticho jdou ruku v ruce."),
         "description": ("Byt 08 je 2+kk se vším co od bytu očekáváte — velký obývák s KK "
@@ -489,10 +489,10 @@ APARTMENTS = [
     {
         "id": "11", "patro": "4.NP", "patro_short": "4.NP",
         "dispozice": "2+kk", "plocha": 43.57,
-        "extra": {"typ": "balkón", "plocha": 7.26, "popis": "Balkón 7,26 m²"},
+        "extra": {"typ": "balkon", "plocha": 7.26, "popis": "Balkón 7,26 m²"},
         "tag": "S balkonem 7,26 m²",
-        "headline": "2+kk s největším balkónem do vnitrobloku",
-        "headline_html": '2+kk <em>s největším balkónem</em><br>do vnitrobloku',
+        "headline": "2+kk s největším balkonem do vnitrobloku",
+        "headline_html": '2+kk <em>s největším balkonem</em><br>do vnitrobloku',
         "lead": ("2+kk s největším balkonem v domě (7,26 m²) ve 4. patře. Velký obývák, "
                  "oddělená ložnice, sluníčko shora od podkroví. Krásně prosvětlený po celý den."),
         "description": ("Byt 11 je 2+kk ve 4. patře s největším balkonem v celém domě (7,26 m²) "
@@ -726,9 +726,9 @@ footer .legal{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.1);padding
 # FOOTER (společný)
 # ---------------------------------------------------------------------------
 
-def _footer_html(base: str = "") -> str:
-    """base: '' pro index, '../' pro byt podstránku — aby odkazy fungovaly na GitHub Pages bez absolute paths."""
-    index_link = f"{base}index.html" if base else ""
+def _footer_html(base: str = "", on_index: bool = False) -> str:
+    """base: '' pro root, '../' pro byt podstránku; on_index=True jen na indexu (kotvy bez prefixu)."""
+    index_link = "" if on_index else f"{base}index.html"
     return dedent(f"""
     <footer>
       <div class="wrap">
@@ -938,7 +938,7 @@ def render_apt_page(apt: dict) -> str:
     cta_aria = ' aria-disabled="true"' if cta_disabled else ""
     status_class = status.replace(" ", "-")  # "k dispozici" → "k-dispozici"
 
-    # Rozdělit místnosti — interní (do součtu) vs venkovní (balkón/terasa pod součtem)
+    # Rozdělit místnosti — interní (do součtu) vs venkovní (balkon/terasa pod součtem)
     internal_rooms = [(n, a) for n, a in apt["rooms"] if not any(k in n.lower() for k in ("balk", "teras"))]
     outdoor_rooms = [(n, a) for n, a in apt["rooms"] if any(k in n.lower() for k in ("balk", "teras"))]
     rooms_html = "\n          ".join(
@@ -1175,7 +1175,7 @@ def render_apt_page(apt: dict) -> str:
             else 'Tento byt je prodán.'
         }</h2>
         <p>{
-            'Ozvete se nám pro rezervaci, prohlídku nebo individuální nabídku. Pro předplatitele (předplacení 60–80 % kupní ceny) je k dispozici výhodnější cena. Odpovídáme do 24 hodin.' if status == 'k dispozici'
+            'Ozvěte se nám pro rezervaci, prohlídku nebo individuální nabídku. Pro předplatitele (předplacení 60–80 % kupní ceny) je k dispozici výhodnější cena. Odpovídáme do 24 hodin.' if status == 'k dispozici'
             else 'Tento byt je momentálně rezervován. Můžete si nechat zaslat upozornění, pokud by se status změnil — případně se podívejte na podobné dostupné byty.' if status == 'rezervovano'
             else 'Tento byt byl prodán. Pokud Vás zajímají podobné dispozice v Domě Netušil, podívejte se na ostatní byty.'
         }</p>
@@ -1449,6 +1449,7 @@ def render_index(apartments: list[dict]) -> str:
     <ul>
       <li><a href="#o-projektu">O projektu</a></li>
       <li><a href="#byty">Byty</a></li>
+      <li><a href="standardy.html">Standard</a></li>
       <li><a href="#lokalita">Lokalita</a></li>
       <li><a href="#galerie">Galerie</a></li>
     </ul>
@@ -1636,7 +1637,7 @@ def render_index(apartments: list[dict]) -> str:
   </div>
 </section>
 
-{_footer_html()}
+{_footer_html(on_index=True)}
 
 <script src="script.js" defer></script>
 </body>
@@ -1820,7 +1821,7 @@ def render_standardy() -> str:
   <div class="wrap">
     <span class="eyebrow">Poznámka ke standardu</span>
     <h2>Kuchyň na míru, klientské změny po dohodě.</h2>
-    <p>Kuchyňská linka není součástí dodávky — přípojky jsou připraveny a necháváme vám prostor
+    <p>Kuchyňská linka není součástí dodávky — přípojky jsou připraveny a necháváme Vám prostor
     pro kuchyň na míru. Nad rámec standardu nabízíme klientské změny, například koupelnový
     nábytek a doplňky.</p>
     <a class="btn btn-primary" href="index.html#kontakt">Sjednat prohlídku</a>
