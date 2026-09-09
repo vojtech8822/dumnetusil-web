@@ -171,7 +171,7 @@ APARTMENTS = [
         "lead": ("Největší byt v přízemí s privátní 25m² terasou a vlastní předzahrádkou "
                  "orientovanou do klidného vnitrobloku. Vlastní zelený prostor pro rána u kávy "
                  "i letní večeře — vzácnost v centru Brna."),
-        "description": ("Byt 01 je nejlukrativnější jednotka v přízemí — kombinace 2+kk "
+        "description": ("Byt 01 je jediná jednotka v domě, která kombinuje 2+kk "
                         "s vlastní 25m² terasou a soukromou předzahrádkou, které se otevírají "
                         "do tichého vnitrobloku. "
                         "Obývací pokoj s kuchyňským koutem (24,87 m²) je centrálním prostorem "
@@ -494,7 +494,7 @@ APARTMENTS = [
         "headline": "2+kk s největším balkónem do vnitrobloku",
         "headline_html": '2+kk <em>s největším balkónem</em><br>do vnitrobloku',
         "lead": ("2+kk s největším balkonem v domě (7,26 m²) ve 4. patře. Velký obývák, "
-                 "oddělená ložnice, sluníčko shora od podkroví. Nejvyšší kvalita světla."),
+                 "oddělená ložnice, sluníčko shora od podkroví. Krásně prosvětlený po celý den."),
         "description": ("Byt 11 je 2+kk ve 4. patře s největším balkonem v celém domě (7,26 m²) "
                         "do tichého vnitrobloku se zelenou střechou. Otevřený obývák s KK (19,73 m²), "
                         "oddělená ložnice (13,23 m²), koupelna a předsíň.\n\n"
@@ -524,10 +524,10 @@ APARTMENTS = [
         "id": "12", "patro": "4.NP", "patro_short": "4.NP",
         "dispozice": "1+kk", "plocha": 24.22,
         "extra": None,
-        "tag": "Nejvyšší patro",
+        "tag": "Vyšší patro",
         "headline": "1+kk ve 4. NP s pohledem do ulice",
-        "headline_html": '1+kk <em>v nejvyšším</em><br>bytovém patře',
-        "lead": ("1+kk ve 4. NP. Nejvyšší světelná kvalita a klid v domě."),
+        "headline_html": '1+kk <em>ve 4. NP</em><br>s pohledem do ulice',
+        "lead": ("1+kk ve 4. NP. Hodně světla a klid vyššího patra."),
         "description": ("Byt 12 je 1+kk ve čtvrtém patře — vyšší patro znamená lepší světlo, "
                         "klid od ulice a oddálení od bezprostředního ruchu města. Otevřený "
                         "obývák s KK (16,09 m²), samostatná koupelna a předsíň.\n\n"
@@ -554,7 +554,7 @@ APARTMENTS = [
         "id": "13", "patro": "4.NP", "patro_short": "4.NP",
         "dispozice": "1+kk", "plocha": 25.11,
         "extra": None,
-        "tag": "Nejvyšší patro",
+        "tag": "Vyšší patro",
         "headline": "1+kk vhodný pro investory",
         "headline_html": '1+kk <em>vhodný</em><br>pro investory',
         "lead": ("1+kk ve čtvrtém patře orientovaný do ulice. Maximum světla ve vyšším patře."),
@@ -742,6 +742,7 @@ def _footer_html(base: str = "") -> str:
           <ul>
             <li><a href="{index_link}#o-projektu">O projektu</a></li>
             <li><a href="{index_link}#byty">Byty</a></li>
+            <li><a href="{base}standardy.html">Standard vybavení</a></li>
             <li><a href="{index_link}#lokalita">Lokalita</a></li>
             <li><a href="{index_link}#galerie">Galerie</a></li>
             <li><a href="{index_link}#kontakt">Kontakt</a></li>
@@ -882,6 +883,31 @@ APT_PAGE_CSS = dedent("""
 """).strip()
 
 
+# ---------------------------------------------------------------------------
+# CSS — Standard vybavení (blok na kartách bytů + stránka standardy.html)
+# ---------------------------------------------------------------------------
+
+STANDARD_CSS = dedent("""
+.standard-blok{background:var(--paper)}
+.standard-blok .wrap{padding:72px 0}
+.standard-blok .sub{color:var(--ink-soft);max-width:640px;margin-bottom:34px}
+.standard-blok ul{list-style:none;margin:0 0 30px;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:0 40px}
+@media(max-width:800px){.standard-blok ul{grid-template-columns:1fr}}
+.standard-blok li{display:flex;flex-direction:column;gap:3px;padding:16px 0;border-bottom:1px solid var(--line)}
+.standard-blok li span{font-family:var(--sans);font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-mute)}
+.standard-blok li strong{font-weight:600;font-size:.97rem}
+.standard-blok .cta{font-family:var(--sans);font-weight:600;color:var(--accent);border-bottom:1px solid var(--accent);padding-bottom:2px}
+
+/* Stránka standardy.html */
+.standardy-hero{padding:170px 0 70px;background:var(--bg)}
+.standardy-hero p{max-width:680px;font-size:1.06rem;line-height:1.7;margin:0}
+.standardy-page .standard-blok{border-top:1px solid var(--line)}
+.standardy-note{background:var(--bg);border-top:1px solid var(--line)}
+.standardy-note .wrap{padding:64px 0}
+.standardy-note p{max-width:680px;margin-bottom:30px}
+""").strip()
+
+
 def render_apt_page(apt: dict) -> str:
     aid = apt["id"]
     plocha_str = _fmt_m2(apt["plocha"])
@@ -925,6 +951,12 @@ def render_apt_page(apt: dict) -> str:
     )
     features_html = "\n            ".join(
         f"<li>{_escape(f)}</li>" for f in apt["features"]
+    )
+
+    # Standard vybavení — byt 01 má skládací kout Ronal Solino do niky, ostatní Divera
+    koupelna_std = (
+        "Ronal Solino · Grohe · Laufen · Geberit" if aid == "01"
+        else "Ronal Divera · Grohe · Laufen · Geberit"
     )
 
     title = f"Byt {aid} — {apt['dispozice']} {plocha_str} m² — Dům Netušil"
@@ -1068,7 +1100,7 @@ def render_apt_page(apt: dict) -> str:
           <h3>Technické parametry</h3>
           <table>
             <tr><td>Vytápění</td><td>Tepelné čerpadlo</td></tr>
-            <tr><td>Energetická třída</td><td>B (dle zpracovaného PENB, 8/2026)</td></tr>
+            <tr><td>Energetická třída</td><td>A — mimořádně úsporná (dle PENB 08/2026)</td></tr>
             <tr><td>Konstrukce stěn</td><td>Cihelné tvarovky HELUZ</td></tr>
             <tr><td>Zateplení</td><td>Minerální vata</td></tr>
             <tr><td>Patro</td><td>{_escape(apt['patro'])}</td></tr>
@@ -1087,6 +1119,24 @@ def render_apt_page(apt: dict) -> str:
   </div>
 </section>
 
+<section class="standard-blok">
+  <div class="wrap">
+    <span class="eyebrow">Standard vybavení</span>
+    <h2>Ve standardu, ne za příplatek.</h2>
+    <p class="sub">Každý byt předáváme kompletně vybavený od bezpečnostních dveří po podlahové
+    chlazení — ve značkách, které jinde bývají příplatkem.</p>
+    <ul>
+      <li><span>Vstupní dveře</span><strong>Magnum 56 · RC3 · EI30 · 44 dB</strong></li>
+      <li><span>Interiérové dveře</span><strong>Sapeli Elegant, bílé</strong></li>
+      <li><span>Koupelna</span><strong>{koupelna_std}</strong></li>
+      <li><span>Dlažby a obklady</span><strong>Marazzi Konzept — výběr z 5 dekorů</strong></li>
+      <li><span>Podlahy</span><strong>Vinyl, dekor světlý dub</strong></li>
+      <li><span>Okna</span><strong>Dřevěná PKS, trojskla, mahagon</strong></li>
+    </ul>
+    <a class="cta" href="../standardy.html">Kompletní standard vybavení &rarr;</a>
+  </div>
+</section>
+
 <section class="bathroom">
   <div class="wrap">
     <div class="grid">
@@ -1097,14 +1147,13 @@ def render_apt_page(apt: dict) -> str:
         <span class="eyebrow">Vzorová koupelna</span>
         <h2>Sprchový kout, designové dlažby, přírodní materiály.</h2>
         <p>Všechny byty v Domě Netušil mají koupelny v jednotném standardu — kvalitní obklady,
-        kvalitní sanita, baterie Hansgrohe. Možnost dovybavení dle individuálního výběru klienta.</p>
+        kvalitní sanita, baterie Grohe. Možnost dovybavení dle individuálního výběru klienta.</p>
         <ul>
-          <li><span>Sprchový kout</span><strong>Standard</strong></li>
-          <li><span>Vana</span><strong>Dle dispozice / na přání</strong></li>
+          <li><span>Sprchový kout</span><strong>Ronal (SanSwiss)</strong></li>
           <li><span>WC kompletní</span><strong>Geberit</strong></li>
-          <li><span>Obklady</span><strong>Velkoformátový gres</strong></li>
+          <li><span>Obklady</span><strong>Marazzi Konzept, matné</strong></li>
           <li><span>Podlahové vytápění</span><strong>Ano</strong></li>
-          <li><span>Odvětrání</span><strong>Centrální VZT</strong></li>
+          <li><span>Odvětrání</span><strong>Odsávací ventilátor</strong></li>
         </ul>
       </div>
     </div>
@@ -1126,7 +1175,7 @@ def render_apt_page(apt: dict) -> str:
             else 'Tento byt je prodán.'
         }</h2>
         <p>{
-            'Ozvete se nám pro rezervaci, prohlídku nebo individuální nabídku. Pro předplatitele (předplacení 50–70 % kupní ceny) je k dispozici výhodnější cena. Odpovídáme do 24 hodin.' if status == 'k dispozici'
+            'Ozvete se nám pro rezervaci, prohlídku nebo individuální nabídku. Pro předplatitele (předplacení 60–80 % kupní ceny) je k dispozici výhodnější cena. Odpovídáme do 24 hodin.' if status == 'k dispozici'
             else 'Tento byt je momentálně rezervován. Můžete si nechat zaslat upozornění, pokud by se status změnil — případně se podívejte na podobné dostupné byty.' if status == 'rezervovano'
             else 'Tento byt byl prodán. Pokud Vás zajímají podobné dispozice v Domě Netušil, podívejte se na ostatní byty.'
         }</p>
@@ -1136,7 +1185,7 @@ def render_apt_page(apt: dict) -> str:
             (f'Kupní cena{cena_label_extra}') if status != 'prodano' else (f'Prodejní cena{cena_label_extra}')
         }</div>
         <div class="amount {'amount-sold' if status == 'prodano' else ''}">{cena_str}&nbsp;Kč</div>
-        <div class="sub">{cena_m2_str} Kč/m²{kc_m2_pozn}{' · Výhodnější cena pro předplatitele (50–70 % kupní ceny)' if status == 'k dispozici' else ''}</div>
+        <div class="sub">{cena_m2_str} Kč/m²{kc_m2_pozn}{' · Výhodnější cena pro předplatitele (60–80 % kupní ceny)' if status == 'k dispozici' else ''}</div>
         <a class="{cta_class}" href="{cta_href}"{cta_aria}>{cta_text}</a>
         <a class="btn btn-secondary" href="../img/pudorysy/byt-{aid}.png" download>Stáhnout půdorys</a>
         <span class="small">{
@@ -1485,7 +1534,7 @@ def render_index(apartments: list[dict]) -> str:
         <div class="stat-row"><span>Velikost jednotek</span><strong>24–60 m²</strong></div>
         <div class="stat-row"><span>Pater</span><strong>5 + podkroví</strong></div>
         <div class="stat-row"><span>Vytápění</span><strong>Tepelné čerpadlo</strong></div>
-        <div class="stat-row"><span>Energetická třída</span><strong>B (PENB)</strong></div>
+        <div class="stat-row"><span>Energetická třída</span><strong>A (PENB)</strong></div>
         <div class="stat-row"><span>Konstrukce</span><strong>HELUZ Family + AKU</strong></div>
         <div class="stat-row"><span>Střecha</span><strong>Zelená, extenzivní</strong></div>
         <div class="stat-row"><span>Předání</span><strong>{DOKONCENI}</strong></div>
@@ -1596,6 +1645,197 @@ def render_index(apartments: list[dict]) -> str:
 
 
 # ---------------------------------------------------------------------------
+# STRÁNKA STANDARD VYBAVENÍ (standardy.html)
+# ---------------------------------------------------------------------------
+
+def render_standardy() -> str:
+    title = "Standard vybavení — Dům Netušil"
+    description = ("Standard vybavení bytů Dům Netušil — bezpečnostní dveře Magnum 56, "
+                   "koupelny Ronal, Grohe a Laufen, dlažby Marazzi, dřevěná okna PKS, "
+                   "podlahové vytápění i chlazení, energetická třída A.")
+
+    return dedent(f"""\
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="{_escape(description)}">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'">
+<meta name="theme-color" content="#1b1b1b">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="{SITE_URL}/standardy.html">
+<script type="application/ld+json">{{"@context":"https://schema.org","@type":"WebPage","name":"Standard vybavení — Dům Netušil","url":"{SITE_URL}/standardy.html","isPartOf":{{"@type":"WebSite","name":"Dům Netušil","url":"{SITE_URL}"}}}}</script>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="{_escape(title)}">
+<meta property="og:description" content="{_escape(description)}">
+<meta property="og:url" content="{SITE_URL}/standardy.html">
+<meta property="og:image" content="{SITE_URL}/img/vizualizace/koupelna.jpg">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Dům Netušil">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{_escape(title)}">
+<meta name="twitter:description" content="{_escape(description)}">
+<meta name="twitter:image" content="{SITE_URL}/img/vizualizace/koupelna.jpg">
+
+<title>{_escape(title)}</title>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="standardy-page">
+
+<nav class="top">
+  <div class="wrap">
+    <a class="logo" href="index.html">Dům Netušil<small>Netušilova 15 · Brno-Husovice</small></a>
+    <a class="back" href="index.html#byty">&larr; Zpět na byty</a>
+  </div>
+</nav>
+
+<header class="standardy-hero">
+  <div class="wrap">
+    <span class="eyebrow">Standard vybavení</span>
+    <h1>Ve standardu, ne za příplatek.</h1>
+    <p>Všechny byty v Domě Netušil předáváme kompletně vybavené — od bezpečnostních vstupních
+    dveří po podlahové vytápění a chlazení. Standard stavíme na značkách, které jinde bývají
+    příplatkem. Plánované dokončení {DOKONCENI}.</p>
+  </div>
+</header>
+
+<section class="standard-blok">
+  <div class="wrap">
+    <span class="eyebrow">Vstupní dveře</span>
+    <h2>Bezpečí i ticho hned za prahem.</h2>
+    <p class="sub">Do každého bytu vedou bezpečnostní dveře HT dveře Magnum 56 — chrání byt,
+    drží venku hluk a splňují požární požadavky.</p>
+    <ul>
+      <li><span>Model</span><strong>HT dveře Magnum 56, bílé</strong></li>
+      <li><span>Bezpečnost</span><strong>Třída RC3 · 14bodový zámek</strong></li>
+      <li><span>Požární odolnost</span><strong>EI30</strong></li>
+      <li><span>Zvukový útlum</span><strong>44 dB</strong></li>
+    </ul>
+  </div>
+</section>
+
+<section class="standard-blok">
+  <div class="wrap">
+    <span class="eyebrow">Interiérové dveře</span>
+    <h2>Sapeli Elegant v celém bytě.</h2>
+    <p class="sub">Interiérové dveře od českého výrobce Sapeli s odolným povrchem CPL laminát.</p>
+    <ul>
+      <li><span>Model</span><strong>Sapeli Elegant</strong></li>
+      <li><span>Povrch</span><strong>CPL laminát — odolný povrch</strong></li>
+      <li><span>Provedení</span><strong>Bílé, obložkové zárubně</strong></li>
+    </ul>
+  </div>
+</section>
+
+<section class="standard-blok">
+  <div class="wrap">
+    <span class="eyebrow">Koupelna</span>
+    <h2>Kompletní koupelna ve značkách Ronal, Grohe, Laufen a Geberit.</h2>
+    <p class="sub">Koupelny předáváme hotové — sprchový kout, sanita, baterie i otopný žebřík
+    jsou součástí standardu každého bytu.</p>
+    <ul>
+      <li><span>Sprchový kout</span><strong>Ronal (SanSwiss) Divera — čtvrtkruh, 6mm sklo s úpravou Aquaperle</strong></li>
+      <li><span>Sprchová vanička</span><strong>Ronal Livada — litý mramor s protiskluzem</strong></li>
+      <li><span>Byt 01</span><strong>Skládací kout Ronal Solino do niky</strong></li>
+      <li><span>Sprchová baterie</span><strong>Grohe Grohtherm 800 (termostatická) + sprchový set Tempesta</strong></li>
+      <li><span>Umyvadlová baterie</span><strong>Grohe Eurosmart</strong></li>
+      <li><span>WC</span><strong>Artceram File 2.0 Rimless, závěsné</strong></li>
+      <li><span>Instalační systém</span><strong>Geberit Duofix + tlačítko Sigma01</strong></li>
+      <li><span>Umyvadlo</span><strong>Laufen Pro S 60 cm</strong></li>
+      <li><span>Otopný žebřík</span><strong>S elektrickou topnou patronou</strong></li>
+    </ul>
+  </div>
+</section>
+
+<section class="standard-blok">
+  <div class="wrap">
+    <span class="eyebrow">Dlažby a obklady</span>
+    <h2>Marazzi Konzept — dekor si vybíráte v ceně.</h2>
+    <p class="sub">Italská série Marazzi Konzept v matném provedení. Dekor si každý klient
+    vybírá sám — bez příplatku.</p>
+    <ul>
+      <li><span>Série</span><strong>Marazzi Konzept, matné provedení</strong></li>
+      <li><span>Dlažba</span><strong>60×60 cm</strong></li>
+      <li><span>Obklad</span><strong>30×60 cm</strong></li>
+      <li><span>Dekory</span><strong>Výběr z 5 dekorů v ceně — bianco, beige, grigio, antracite, nero</strong></li>
+    </ul>
+  </div>
+</section>
+
+<section class="standard-blok">
+  <div class="wrap">
+    <span class="eyebrow">Podlahy</span>
+    <h2>Světlý dub v obytných místnostech.</h2>
+    <p class="sub">Obytné místnosti mají vinylovou podlahu v dekoru světlý dub — teplý,
+    tichý a odolný povrch.</p>
+    <ul>
+      <li><span>Obytné místnosti</span><strong>Vinyl, dekor světlý dub</strong></li>
+    </ul>
+  </div>
+</section>
+
+<section class="standard-blok">
+  <div class="wrap">
+    <span class="eyebrow">Okna</span>
+    <h2>Dřevěná okna PKS s izolačními trojskly.</h2>
+    <p class="sub">Okna od českého výrobce PKS v masivním dřevěném profilu — v odstínu mahagon
+    zvenku i zevnitř. Střešní okna Velux.</p>
+    <ul>
+      <li><span>Okna</span><strong>Dřevěná PKS — český výrobce</strong></li>
+      <li><span>Profil</span><strong>IV 88, izolační trojskla</strong></li>
+      <li><span>Tepelná izolace</span><strong>Ug 0,60 · Uw od 0,77 W/m²K</strong></li>
+      <li><span>Odstín</span><strong>Mahagon zvenku i zevnitř</strong></li>
+      <li><span>Zvuková izolace</span><strong>Až 44 dB</strong></li>
+      <li><span>Střešní okna</span><strong>Velux, dřevěná, s trojsklem</strong></li>
+    </ul>
+  </div>
+</section>
+
+<section class="standard-blok">
+  <div class="wrap">
+    <span class="eyebrow">Energie a komfort</span>
+    <h2>Třída A. Podlahové vytápění i chlazení.</h2>
+    <p class="sub">Dům je navržen pro nízké provozní náklady a celoroční komfort — v zimě
+    podlahové vytápění, v létě podlahové chlazení.</p>
+    <ul>
+      <li><span>Energetická třída</span><strong>A — mimořádně úsporná (dle PENB 08/2026)</strong></li>
+      <li><span>Vytápění a chlazení</span><strong>Podlahové, ve všech místnostech</strong></li>
+      <li><span>Zdroj tepla</span><strong>Tepelná čerpadla vzduch/voda</strong></li>
+      <li><span>Měření</span><strong>Měřiče tepla a chladu v každém bytě</strong></li>
+      <li><span>Akustika</span><strong>Mezibytové konstrukce 56 dB</strong></li>
+    </ul>
+  </div>
+</section>
+
+<section class="standardy-note">
+  <div class="wrap">
+    <span class="eyebrow">Poznámka ke standardu</span>
+    <h2>Kuchyň na míru, klientské změny po dohodě.</h2>
+    <p>Kuchyňská linka není součástí dodávky — přípojky jsou připraveny a necháváme vám prostor
+    pro kuchyň na míru. Nad rámec standardu nabízíme klientské změny, například koupelnový
+    nábytek a doplňky.</p>
+    <a class="btn btn-primary" href="index.html#kontakt">Sjednat prohlídku</a>
+  </div>
+</section>
+
+{_footer_html()}
+
+<script src="script.js" defer></script>
+</body>
+</html>
+""")
+
+
+# ---------------------------------------------------------------------------
 # Sdílený JS (filtrování + lightbox)
 # ---------------------------------------------------------------------------
 
@@ -1680,6 +1920,7 @@ def render_sitemap() -> str:
     urls = [f"  <url><loc>{SITE_URL}/</loc><lastmod>{today}</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>"]
     for apt in APARTMENTS:
         urls.append(f"  <url><loc>{SITE_URL}/byty/byt-{apt['id']}.html</loc><lastmod>{today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>")
+    urls.append(f"  <url><loc>{SITE_URL}/standardy.html</loc><lastmod>{today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>")
     urls.append(f"  <url><loc>{SITE_URL}/ochrana-osobnich-udaju.html</loc><lastmod>{today}</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>")
     return dedent(f"""\
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1813,7 +2054,12 @@ def main():
         apt["status_poznamka"] = info.get("poznamka", "")
 
     # styles.css
-    css = SHARED_CSS + "\n\n/* index */\n" + INDEX_CSS + "\n\n/* apt page */\n" + APT_PAGE_CSS
+    css = (SHARED_CSS + "\n\n/* index */\n" + INDEX_CSS + "\n\n/* apt page */\n" + APT_PAGE_CSS
+           + "\n\n/* standard vybavení */\n" + STANDARD_CSS)
+    import re as _re_css
+    css = _re_css.sub(r"url\('(img/[^'?]+)'\)",
+                 lambda m: f"url('{m.group(1)}?v={_asset_hash(root, m.group(1))}')" if _asset_hash(root, m.group(1)) else m.group(0),
+                 css)
     (root / "styles.css").write_text(css)
 
     # script.js
@@ -1825,6 +2071,9 @@ def main():
 
     # index.html
     (root / "index.html").write_text(bust_assets(render_index(APARTMENTS), root))
+
+    # standardy.html
+    (root / "standardy.html").write_text(bust_assets(render_standardy(), root))
 
     # sitemap, robots, .htaccess
     (root / "sitemap.xml").write_text(render_sitemap())
@@ -1850,7 +2099,7 @@ def main():
     reserved = sum(1 for a in APARTMENTS if a["status"] == "rezervovano")
     sold = sum(1 for a in APARTMENTS if a["status"] == "prodano")
 
-    print(f"✓ Generováno {len(APARTMENTS)} podstránek + index + sitemap + robots + .htaccess + 404.html + .nojekyll")
+    print(f"✓ Generováno {len(APARTMENTS)} podstránek + index + standardy + sitemap + robots + .htaccess + 404.html + .nojekyll")
     print(f"  Status: {avail} k dispozici · {reserved} rezervováno · {sold} prodáno")
 
 

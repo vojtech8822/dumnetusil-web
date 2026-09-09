@@ -5,7 +5,7 @@ Krok za krokem návod, jak dostat tento web online. Trvá to ~15 minut.
 ## Co potřebuješ
 
 - GitHub účet (nemáš? založ na [github.com/signup](https://github.com/signup))
-- Tento adresář (`Web pro GIT/`) na disku
+- Tento adresář (`99_archiv/web/Web-pro-GIT/`) na disku
 - Terminál (na Macu: Spotlight → "Terminal")
 - Nainstalovaný Git (`git --version` v Terminálu, na Macu je už předinstalován)
 
@@ -25,11 +25,11 @@ Krok za krokem návod, jak dostat tento web online. Trvá to ~15 minut.
 
 ### Krok 2: Otevři Terminál v této složce
 
-V Finderu pravým tlačítkem na složku `Web pro GIT` → **Služby** → **Nový terminál ve složce**.
+V Finderu pravým tlačítkem na složku `99_archiv/web/Web-pro-GIT` → **Služby** → **Nový terminál ve složce**.
 
 Nebo přímo v Terminálu:
 ```bash
-cd "/Users/vojtechhavranek/Desktop/_BH development/Netušilova - Husovice/Web pro GIT"
+cd "/Users/vojtechhavranek/Desktop/_BH development/Netušilova - Husovice/99_archiv/web/Web-pro-GIT"
 ```
 
 ### Krok 3: Inicializuj Git, přidej soubory, pushni
@@ -99,13 +99,13 @@ Tohle uděláš pokaždé, když ti od Claude přijde nová verze webu.
 
 ### Postup:
 
-1. **Stáhni si nejnovější `Web pro GIT`** od Claude
+1. **Stáhni si nejnovější `99_archiv/web/Web-pro-GIT`** od Claude
 2. **Otevři Terminál** v tvojí lokální repo složce (kde máš `.git/`)
 3. **Smaž starý obsah** (kromě `.git/`):
    ```bash
    find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
    ```
-4. **Zkopíruj nový obsah** ze složky `Web pro GIT` na místo (přes Finder nebo `cp -r`)
+4. **Zkopíruj nový obsah** ze složky `99_archiv/web/Web-pro-GIT` na místo (přes Finder nebo `cp -r`)
 5. **Commit a push**:
    ```bash
    git add -A
@@ -121,7 +121,7 @@ Pokud nechceš Terminál, [GitHub Desktop](https://desktop.github.com/) je vizu�
 
 1. Stáhni a nainstaluj GitHub Desktop
 2. Otevři tvůj repo
-3. Přetáhni soubory ze `Web pro GIT` do okna GitHub Desktop
+3. Přetáhni soubory ze `99_archiv/web/Web-pro-GIT` do okna GitHub Desktop
 4. Napsat commit message
 5. **Commit to main** → **Push origin**
 

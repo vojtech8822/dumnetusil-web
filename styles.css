@@ -65,7 +65,7 @@ footer .legal{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.1);padding
 
 /* index */
 .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background-image:url('img/vizualizace/ext-1.jpg');background-size:cover;background-position:center;transform:scale(1.05)}
+.hero-bg{position:absolute;inset:0;background-image:url('img/vizualizace/ext-1.jpg?v=65715d42');background-size:cover;background-position:center;transform:scale(1.05)}
 .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.15) 35%,rgba(0,0,0,.55) 75%,rgba(0,0,0,.88) 100%);z-index:1}
 .hero .inner{position:relative;z-index:2;width:100%;padding:180px 0 90px}
 .hero .eyebrow{color:#e4c792}
@@ -294,3 +294,22 @@ section{padding:120px 0;position:relative}
 .price-card.status-card-rezervovano{border-color:rgba(184,84,43,.4);background:rgba(184,84,43,.08)}
 .price-card.status-card-prodano{border-color:rgba(107,32,32,.4);background:rgba(107,32,32,.06)}
 .price-card .amount-sold{text-decoration:line-through;color:rgba(255,255,255,.55)}
+
+/* standard vybavení */
+.standard-blok{background:var(--paper)}
+.standard-blok .wrap{padding:72px 0}
+.standard-blok .sub{color:var(--ink-soft);max-width:640px;margin-bottom:34px}
+.standard-blok ul{list-style:none;margin:0 0 30px;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:0 40px}
+@media(max-width:800px){.standard-blok ul{grid-template-columns:1fr}}
+.standard-blok li{display:flex;flex-direction:column;gap:3px;padding:16px 0;border-bottom:1px solid var(--line)}
+.standard-blok li span{font-family:var(--sans);font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-mute)}
+.standard-blok li strong{font-weight:600;font-size:.97rem}
+.standard-blok .cta{font-family:var(--sans);font-weight:600;color:var(--accent);border-bottom:1px solid var(--accent);padding-bottom:2px}
+
+/* Stránka standardy.html */
+.standardy-hero{padding:170px 0 70px;background:var(--bg)}
+.standardy-hero p{max-width:680px;font-size:1.06rem;line-height:1.7;margin:0}
+.standardy-page .standard-blok{border-top:1px solid var(--line)}
+.standardy-note{background:var(--bg);border-top:1px solid var(--line)}
+.standardy-note .wrap{padding:64px 0}
+.standardy-note p{max-width:680px;margin-bottom:30px}
