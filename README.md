@@ -198,7 +198,7 @@ Ceny **NEPOČÍTÁME** automaticky — jsou definované v souboru `ceny.json`. Z
       "cena_terasy_kc": 1862500
     },
     "02": {
-      "cena_kc": 5066550,
+      "cena_kc": 5101300,
       "cena_kc_m2": 139000
     }
   }

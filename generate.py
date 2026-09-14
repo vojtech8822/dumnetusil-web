@@ -163,6 +163,41 @@ def load_ceny() -> dict:
 APARTMENTS = [
     {
         "id": "01", "patro": "1.NP", "patro_short": "1.NP",
+        "dispozice": "2+kk", "plocha": 36.70,
+        "extra": None,
+        "tag": "Přízemí",
+        "headline": "2+kk s historickou fasádou",
+        "headline_html": '2+kk <em>v přízemí</em><br>se zdobnou fasádou',
+        "lead": ("Kompaktní dvoupokojový byt orientovaný do ulice. Okna se dotýkají "
+                 "zachované zdobné fasády historického měšťanského domu. Vhodný pro dvojici "
+                 "i jako investiční nemovitost s vyšším nájemným potenciálem."),
+        "description": ("Byt 01 je kompaktní 2+kk v přízemí s okny do ulice — jen kousek od "
+                        "zachované zdobné fasády. Otevřený obývací pokoj s kuchyňským koutem "
+                        "(17,58 m²) propojuje denní život, samostatná ložnice nabízí klidné "
+                        "zázemí.\n\n"
+                        "Vhodný pro pár, jednotlivce nebo jako investiční byt s potenciálem "
+                        "vyššího nájemného — přízemí v Husovicích je vyhledávané studenty "
+                        "i mladými profesionály."),
+        "rooms": [
+            ("Obývací pokoj s kuchyňským koutem", "17,58 m²"),
+            ("Ložnice", "9,94 m²"),
+            ("Koupelna + WC", "3,52 m²"),
+            ("Bytová předsíň", "4,47 m²"),
+        ],
+        "features": [
+            "Orientace do ulice s historickou fasádou",
+            "Otevřená dispozice obývák + KK",
+            "Samostatná ložnice s oknem",
+            "Koupelna se sprchovým koutem a WC",
+            "Tepelné čerpadlo",
+        ],
+        "images": ["1np-2kk.jpg", "1np-loznice-2kk.jpg", "ext-1.jpg"],
+        "hero_img": "1np-2kk.jpg",
+        "thumb_gradient": "linear-gradient(135deg,#c8b89e,#9a8265)",
+        "next_id": "02",
+    },
+    {
+        "id": "02", "patro": "1.NP", "patro_short": "1.NP",
         "dispozice": "2+kk", "plocha": 44.11,
         "extra": {"typ": "terasa", "plocha": 25.0, "popis": "Terasa 25 m²"},
         "tag": "Terasa a předzahrádka",
@@ -171,7 +206,7 @@ APARTMENTS = [
         "lead": ("Největší byt v přízemí s privátní 25m² terasou a vlastní předzahrádkou "
                  "orientovanou do klidného vnitrobloku. Vlastní zelený prostor pro rána u kávy "
                  "i letní večeře — vzácnost v centru Brna."),
-        "description": ("Byt 01 je jediná jednotka v domě, která kombinuje 2+kk "
+        "description": ("Byt 02 je jediná jednotka v domě, která kombinuje 2+kk "
                         "s vlastní 25m² terasou a soukromou předzahrádkou, které se otevírají "
                         "do tichého vnitrobloku. "
                         "Obývací pokoj s kuchyňským koutem (24,87 m²) je centrálním prostorem "
@@ -196,41 +231,6 @@ APARTMENTS = [
         "images": ["1np-2kk.jpg", "1np-loznice-2kk.jpg", "ext-4.jpg"],
         "hero_img": "1np-2kk.jpg",
         "thumb_gradient": "linear-gradient(135deg,#a89b80,#7a6140)",
-        "next_id": "02",
-    },
-    {
-        "id": "02", "patro": "1.NP", "patro_short": "1.NP",
-        "dispozice": "2+kk", "plocha": 36.45,
-        "extra": None,
-        "tag": "Přízemí",
-        "headline": "2+kk s historickou fasádou",
-        "headline_html": '2+kk <em>v přízemí</em><br>se zdobnou fasádou',
-        "lead": ("Kompaktní dvoupokojový byt orientovaný do ulice. Okna se dotýkají "
-                 "zachované zdobné fasády historického měšťanského domu. Vhodný pro dvojici "
-                 "i jako investiční nemovitost s vyšším nájemným potenciálem."),
-        "description": ("Byt 02 je kompaktní 2+kk v přízemí s okny do ulice — jen kousek od "
-                        "zachované zdobné fasády. Otevřený obývací pokoj s kuchyňským koutem "
-                        "(17,58 m²) propojuje denní život, samostatná ložnice nabízí klidné "
-                        "zázemí.\n\n"
-                        "Vhodný pro pár, jednotlivce nebo jako investiční byt s potenciálem "
-                        "vyššího nájemného — přízemí v Husovicích je vhodné pro studenty a mladé profesionály "
-                        "i mladými profesionály."),
-        "rooms": [
-            ("Obývací pokoj s kuchyňským koutem", "17,58 m²"),
-            ("Ložnice", "9,81 m²"),
-            ("Koupelna + WC", "3,35 m²"),
-            ("Bytová předsíň", "4,41 m²"),
-        ],
-        "features": [
-            "Orientace do ulice s historickou fasádou",
-            "Otevřená dispozice obývák + KK",
-            "Samostatná ložnice s oknem",
-            "Koupelna se sprchovým koutem a WC",
-            "Tepelné čerpadlo",
-        ],
-        "images": ["1np-2kk.jpg", "1np-loznice-2kk.jpg", "ext-1.jpg"],
-        "hero_img": "1np-2kk.jpg",
-        "thumb_gradient": "linear-gradient(135deg,#c8b89e,#9a8265)",
         "next_id": "03",
     },
     {
@@ -268,7 +268,7 @@ APARTMENTS = [
     {
         "id": "04", "patro": "2.NP", "patro_short": "2.NP",
         "dispozice": "2+kk", "plocha": 43.27,
-        "extra": {"typ": "balkon", "plocha": 5.71, "popis": "Balkón 5,71 m²"},
+        "extra": {"typ": "balkon", "plocha": 5.59, "popis": "Balkón 5,59 m²"},
         "tag": "S balkonem",
         "headline": "2+kk s balkonem do tichého vnitrobloku",
         "headline_html": '2+kk <em>s balkonem</em><br>do tichého vnitrobloku',
@@ -285,10 +285,10 @@ APARTMENTS = [
             ("Ložnice", "11,83 m²"),
             ("Koupelna + WC", "4,08 m²"),
             ("Bytová předsíň", "5,41 m²"),
-            ("Balkón", "5,71 m²"),
+            ("Balkón", "5,59 m²"),
         ],
         "features": [
-            "Vlastní balkon 5,71 m² do vnitrobloku",
+            "Vlastní balkon 5,59 m² do vnitrobloku",
             "Velký obývák s KK (20,59 m²)",
             "Samostatná ložnice",
             "Koupelna se sprchovým koutem a WC",
@@ -394,8 +394,8 @@ APARTMENTS = [
     },
     {
         "id": "08", "patro": "3.NP", "patro_short": "3.NP",
-        "dispozice": "2+kk", "plocha": 43.27,
-        "extra": {"typ": "balkon", "plocha": 5.71, "popis": "Balkón 5,71 m²"},
+        "dispozice": "2+kk", "plocha": 40.21,
+        "extra": {"typ": "balkon", "plocha": 5.59, "popis": "Balkón 5,59 m²"},
         "tag": "S balkonem",
         "headline": "2+kk s balkonem do tichého vnitrobloku",
         "headline_html": '2+kk <em>s balkonem</em><br>do tichého vnitrobloku',
@@ -410,10 +410,10 @@ APARTMENTS = [
             ("Ložnice", "10,54 m²"),
             ("Koupelna + WC", "4,83 m²"),
             ("Bytová předsíň", "4,95 m²"),
-            ("Balkón", "5,71 m²"),
+            ("Balkón", "5,59 m²"),
         ],
         "features": [
-            "Vlastní balkon 5,71 m² do vnitrobloku",
+            "Vlastní balkon 5,59 m² do vnitrobloku",
             "Samostatná ložnice",
             "3. nadzemní patro — světlo a klid",
             "Koupelna se sprchovým koutem a WC",
@@ -582,11 +582,11 @@ APARTMENTS = [
     },
     {
         "id": "14", "patro": "Podkroví", "patro_short": "5.NP",
-        "dispozice": "2+kk se šatnou", "plocha": 60.21,
+        "dispozice": "1+kk + galerie", "plocha": 60.21,
         "extra": None,
         "tag": "Podkroví · Top byt",
-        "headline": "Podkrovní 2+kk se šatnou",
-        "headline_html": 'Podkrovní 2+kk <em>největší</em><br>byt v domě se šatnou',
+        "headline": "Podkrovní 1+kk s galerií",
+        "headline_html": 'Podkrovní 1+kk <em>největší</em><br>byt v domě s galerií',
         "lead": ("Největší jednotka v domě (60,21 m²). Velkorysý obývák s KK, spací galerie, "
                  "prostorná hala, šatna a koupelna. Sluneční světlo shora, atmosféra podkroví."),
         "description": ("Byt 14 je vlajková loď projektu — největší jednotka v domě (60,21 m²) v podkroví. "
@@ -597,7 +597,7 @@ APARTMENTS = [
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "27,39 m²"),
             ("Galerie", "10,88 m²"),
-            ("Hala", "9,96 m²"),
+            ("Hala", "10,09 m²"),
             ("Koupelna + WC", "6,24 m²"),
             ("Šatna", "3,61 m²"),
         ],
@@ -953,9 +953,9 @@ def render_apt_page(apt: dict) -> str:
         f"<li>{_escape(f)}</li>" for f in apt["features"]
     )
 
-    # Standard vybavení — byt 01 má skládací kout Ronal Solino do niky, ostatní Divera
+    # Standard vybavení — byt 02 má skládací kout Ronal Solino do niky, ostatní Divera
     koupelna_std = (
-        "Ronal Solino · Grohe · Laufen · Geberit" if aid == "01"
+        "Ronal Solino · Grohe · Laufen · Geberit" if aid == "02"
         else "Ronal Divera · Grohe · Laufen · Geberit"
     )
 
@@ -1486,7 +1486,7 @@ def render_index(apartments: list[dict]) -> str:
         <h2>14 bytů. 14 různých příběhů.</h2>
       </div>
       <p>Vyberte si podle velikosti, patra nebo vybavení. Každý byt v Domě Netušil
-      má něco svého — od kompaktních 1+kk až po podkrovní 2+kk se šatnou.</p>
+      má něco svého — od kompaktních 1+kk až po podkrovní 2+kk s galerií.</p>
     </div>
 
     <div class="filter" role="group" aria-label="Filtr podle dispozice">
@@ -1746,7 +1746,7 @@ def render_standardy() -> str:
     <ul>
       <li><span>Sprchový kout</span><strong>Ronal (SanSwiss) Divera — čtvrtkruh, 6mm sklo s úpravou Aquaperle</strong></li>
       <li><span>Sprchová vanička</span><strong>Ronal Livada — litý mramor s protiskluzem</strong></li>
-      <li><span>Byt 01</span><strong>Skládací kout Ronal Solino do niky</strong></li>
+      <li><span>Byt 02</span><strong>Skládací kout Ronal Solino do niky</strong></li>
       <li><span>Sprchová baterie</span><strong>Grohe Grohtherm 800 (termostatická) + sprchový set Tempesta</strong></li>
       <li><span>Umyvadlová baterie</span><strong>Grohe Eurosmart</strong></li>
       <li><span>WC</span><strong>Artceram File 2.0 Rimless, závěsné</strong></li>
