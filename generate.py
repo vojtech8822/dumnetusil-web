@@ -34,7 +34,7 @@ def _asset_hash(root: Path, rel: str) -> str | None:
     return h
 
 _ASSET_RE = _re.compile(
-    r'(href|src)="((?:\.\./|/)?(?:img/[^"?]+\.(?:png|jpe?g|webp|svg)|styles\.css|script\.js))"'
+    r'(href|src)="((?:\.\./|/)?(?:img/[^"?]+\.(?:png|jpe?g|webp|svg)|files/[^"?]+\.pdf|styles\.css|script\.js))"'
 )
 _ASSET_URL_RE = _re.compile(
     r"url\('((?:\.\./|/)?img/[^'?]+\.(?:png|jpe?g|webp|svg))'\)"
@@ -1113,7 +1113,7 @@ def render_apt_page(apt: dict) -> str:
       <aside class="floorplan">
         <h3>Půdorys bytu</h3>
         <img src="../img/pudorysy/byt-{aid}.png" alt="Půdorys bytu {aid}" data-zoom loading="lazy">
-        <a href="../img/pudorysy/byt-{aid}.png" download class="download" rel="noopener">⤓ Stáhnout půdorys</a>
+        <a href="../files/karty/Karta-bytu-{aid}.pdf" download class="download" rel="noopener">⤓ Stáhnout kartu bytu (PDF)</a>
       </aside>
     </div>
   </div>
@@ -1187,7 +1187,7 @@ def render_apt_page(apt: dict) -> str:
         <div class="amount {'amount-sold' if status == 'prodano' else ''}">{cena_str}&nbsp;Kč</div>
         <div class="sub">{cena_m2_str} Kč/m²{kc_m2_pozn}{' · Výhodnější cena pro předplatitele (60–80 % kupní ceny)' if status == 'k dispozici' else ''}</div>
         <a class="{cta_class}" href="{cta_href}"{cta_aria}>{cta_text}</a>
-        <a class="btn btn-secondary" href="../img/pudorysy/byt-{aid}.png" download>Stáhnout půdorys</a>
+        <a class="btn btn-secondary" href="../files/karty/Karta-bytu-{aid}.pdf" download>Stáhnout kartu bytu (PDF)</a>
         <span class="small">{
             'Odpovídáme do 24 hodin · BH projects &amp; development s.r.o.' if status == 'k dispozici'
             else 'Pro dotazy: info@dumnetusil.cz'
@@ -1706,6 +1706,7 @@ def render_standardy() -> str:
     <p>Všechny byty v Domě Netušil předáváme kompletně vybavené — od bezpečnostních vstupních
     dveří po podlahové vytápění a chlazení. Standard stavíme na značkách, které jinde bývají
     příplatkem. Plánované dokončení {DOKONCENI}.</p>
+<p style="margin-top:22px"><a href="files/Dum-Netusil-Katalog-standardu.pdf" download style="display:inline-block;background:var(--accent);color:#ffffff;padding:14px 26px;font-family:var(--sans);font-weight:600;letter-spacing:.05em;font-size:.92rem;border:0;text-decoration:none">Stáhnout katalog standardů (PDF)</a></p>
   </div>
 </header>
 
