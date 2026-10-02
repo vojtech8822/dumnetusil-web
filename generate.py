@@ -582,32 +582,34 @@ APARTMENTS = [
     },
     {
         "id": "14", "patro": "Podkroví", "patro_short": "5.NP",
-        "dispozice": "1+kk + galerie", "plocha": 60.21,
+        "dispozice": "3+kk", "plocha": 55.71,
         "extra": None,
-        "tag": "Podkroví · Top byt",
-        "headline": "Podkrovní 1+kk s galerií",
-        "headline_html": 'Podkrovní 1+kk <em>největší</em><br>byt v domě s galerií',
-        "lead": ("Největší jednotka v domě (60,21 m²). Velkorysý obývák s KK, spací galerie, "
-                 "prostorná hala, šatna a koupelna. Sluneční světlo shora, atmosféra podkroví."),
-        "description": ("Byt 14 je vlajková loď projektu — největší jednotka v domě (60,21 m²) v podkroví. "
-                        "Velkorysý obývák s kuchyňským koutem (27,39 m²), spací galerie (10,88 m²), prostorná hala, šatna a koupelna. "
-                        "Atmosféra šikmých stropů, světlo přicházející shora, vyhlídka do okolí.\n\n"
-                        "Pro pár nebo malou rodinu, která si v centru Brna chce dopřát výjimečně velkorysý byt "
-                        "s prémiovou podkrovní atmosférou."),
+        "tag": "Podkroví · 3+kk",
+        "headline": "Podkrovní 3+kk",
+        "headline_html": 'Podkrovní 3+kk <em>v nejvyšším patře</em><br>domu',
+        "lead": ("Prostorný 3+kk v podkroví (55,71 m²) — obývací pokoj s kuchyňským koutem, "
+                 "dva samostatné pokoje, vlastní šatna a oddělené WC. Šikmé stropy a světlo přicházející shora."),
+        "description": ("Byt 14 je podkrovní 3+kk o podlahové ploše 55,71 m² v nejvyšším patře domu. "
+                        "Dispozici tvoří obývací pokoj s kuchyňským koutem (18,93 m²), dva pokoje (12,58 a 9,88 m²), "
+                        "hala, vlastní šatna, sociální zázemí a samostatné WC.\n\n"
+                        "Charakter bytu určují šikmé stropy podkroví a denní světlo přicházející shora — "
+                        "dispozice vhodná pro pár i menší rodinu, která hledá v centru Brna netradiční podkrovní byt."),
         "rooms": [
-            ("Obývací pokoj s kuchyňským koutem", "27,39 m²"),
-            ("Galerie", "10,88 m²"),
-            ("Hala", "10,09 m²"),
-            ("Koupelna + WC", "6,24 m²"),
-            ("Šatna", "3,61 m²"),
+            ("Obývací pokoj s kuchyňským koutem", "18,93 m²"),
+            ("Pokoj", "12,58 m²"),
+            ("Ložnice", "9,88 m²"),
+            ("Hala", "4,89 m²"),
+            ("Šatna", "2,58 m²"),
+            ("Sociální zázemí", "3,44 m²"),
+            ("WC", "3,77 m²"),
         ],
         "features": [
-            "Největší byt v domě (60,21 m²)",
-            "Podkrovní atmosféra — šikmé stropy",
+            "Prostorný 3+kk v podkroví (55,71 m²)",
+            "Obývací pokoj s kuchyňským koutem",
+            "Dva samostatné pokoje",
             "Vlastní šatna",
-            "Spací galerie (10,88 m²)",
-            "Maximální množství světla shora",
-            "K dispozici — vlajková loď projektu",
+            "Podkrovní atmosféra — šikmé stropy, světlo shora",
+            "Samostatné WC",
         ],
         "images": ["4np-2kk.jpg", "4np-loznice-2kk.jpg", "ext-4.jpg"],
         "hero_img": "4np-2kk.jpg",
