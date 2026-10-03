@@ -1488,7 +1488,7 @@ def render_index(apartments: list[dict]) -> str:
         <h2>14 bytů. 14 různých příběhů.</h2>
       </div>
       <p>Vyberte si podle velikosti, patra nebo vybavení. Každý byt v Domě Netušil
-      má něco svého — od kompaktních 1+kk až po podkrovní 2+kk s galerií.</p>
+      má něco svého — od kompaktních 1+kk až po podkrovní 3+kk.</p>
     </div>
 
     <div class="filter" role="group" aria-label="Filtr podle dispozice">
