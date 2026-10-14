@@ -459,24 +459,24 @@ APARTMENTS = [
         "id": "10", "patro": "3.NP", "patro_short": "3.NP",
         "dispozice": "1+kk", "plocha": 25.11,
         "extra": None,
-        "tag": "Do vnitrobloku",
-        "headline": "1+kk do tichého vnitrobloku",
-        "headline_html": '1+kk <em>v 3. patře</em><br>s klidem vnitrobloku',
-        "lead": ("Kompaktní 1+kk s výhledem do klidného vnitrobloku ve třetím patře. "
-                 "Tichá lokalita s lepším světlem a klidem."),
-        "description": ("Byt 10 je 1+kk orientovaný do vnitrobloku ve třetím patře. "
-                        "Maximální ticho, lepší světlo než v nižších patrech, otevřený "
-                        "obývák s KK (16,11 m²).\n\n"
-                        "Pro toho, kdo prioritizuje klid — práci z domova, klidný spánek, "
-                        "tichá lokalita uprostřed města."),
+        "tag": "Do ulice",
+        "headline": "1+kk s pohledem do ulice",
+        "headline_html": '1+kk <em>v 3. patře</em><br>s pohledem do ulice',
+        "lead": ("Kompaktní 1+kk s okny do ulice ve třetím patře. Vyšší patro — "
+                 "lepší světlo a klid od pouličního ruchu."),
+        "description": ("Byt 10 je 1+kk s okny do ulice ve třetím patře — výška mu dává klid "
+                        "a více světla. Otevřený obývák s kuchyňským koutem (16,11 m²), "
+                        "samostatná koupelna a předsíň.\n\n"
+                        "Pro toho, kdo chce malý byt s charakterem — pohled do zdobné "
+                        "historické fasády vlastního domu."),
         "rooms": [
             ("Obývací pokoj s kuchyňským koutem", "16,11 m²"),
             ("Koupelna + WC", "4,36 m²"),
             ("Bytová předsíň", "3,77 m²"),
         ],
         "features": [
-            "Orientace do tichého vnitrobloku",
-            "3. nadzemní patro — lepší světlo a klid",
+            "Orientace do ulice — pohled na historickou fasádu",
+            "3. nadzemní patro — lepší světlo",
             "Otevřená dispozice obývák + KK",
             "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
