@@ -731,6 +731,10 @@ a:hover{border-color:var(--accent-dark)}
 .btn-ghost:hover{background:#fff;color:var(--ink);border-color:#fff}
 .btn-outline{background:transparent;color:var(--ink);border:1px solid var(--ink)}
 .btn-outline:hover{background:var(--ink);color:#fff}
+.nav-cta{display:flex;align-items:center;gap:18px}
+.nav-ig{display:inline-flex;align-items:center;color:var(--ink);opacity:.7;transition:opacity .2s,color .2s;border:0}
+.nav-ig:hover{opacity:1;color:var(--accent-dark)}
+.nav-ig svg{width:21px;height:21px}
 
 nav.top{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(247,245,241,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:18px 0}
 nav.top .wrap{display:flex;align-items:center;justify-content:space-between}
@@ -1385,7 +1389,7 @@ section{padding:120px 0;position:relative}
 @media(max-width:600px){.kontakt .contact-cards{grid-template-columns:1fr}}
 .kontakt .contact-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);padding:30px 28px}
 .kontakt .contact-card .role{font-size:.7rem;text-transform:uppercase;letter-spacing:.18em;color:#e4c792;font-weight:700;margin-bottom:10px}
-.kontakt .contact-card h3{font-family:var(--serif);color:#fff;font-size:1.5rem;font-weight:500;margin:0 0 16px}
+.kontakt .contact-card h3{font-family:var(--serif);color:#fff;font-size:1.28rem;font-weight:500;margin:0 0 16px;white-space:nowrap}
 .kontakt .contact-card p{margin:0 0 6px;font-size:.98rem}
 .kontakt .contact-card a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3);transition:border-color .2s}
 .kontakt .contact-card a:hover{border-color:#fff}
@@ -1499,7 +1503,10 @@ def render_index(apartments: list[dict], stavba: list[dict] | None = None) -> st
       <li><a href="#galerie">Galerie</a></li>
       <li><a href="ze-stavby.html">Ze stavby</a></li>
     </ul>
-    <a class="btn btn-outline" href="#kontakt">Mám zájem</a>
+    <div class="nav-cta">
+      <a class="nav-ig" href="{IG_URL}" target="_blank" rel="noopener noreferrer" aria-label="Instagram @dumnetusil">{_IG_SVG}</a>
+      <a class="btn btn-outline" href="#kontakt">Mám zájem</a>
+    </div>
   </div>
 </nav>
 
@@ -2092,7 +2099,7 @@ def _stavba_teaser_html(stavba: list[dict]) -> str:
             <h2>Sledujte, jak <em>dům roste.</em></h2>
             <p class="lead">Rekonstrukce Domu Netušil právě běží. Na podzim 2026 probíhá bourání
             vnitřních konstrukcí a výkopy pro nové základy. Postup výstavby dokumentujeme a pravidelně
-            doplňujeme. Plánované dokončení <strong>{DOKONCENI}</strong>, energetická třída <strong>A</strong>.</p>
+            doplňujeme. Plánované dokončení <strong>{DOKONCENI}</strong>.</p>
             <a class="btn btn-primary" href="ze-stavby.html">Zobrazit galerii ze stavby →</a>
             <span class="teaser-ig">{_IG_SVG} Nejnovější fotky živě na <a href="{IG_URL}" target="_blank" rel="noopener noreferrer">Instagramu @dumnetusil</a></span>
           </div>
@@ -2195,7 +2202,10 @@ def render_ze_stavby(stavba: list[dict]) -> str:
       <li><a href="index.html#galerie">Galerie</a></li>
       <li><a href="ze-stavby.html">Ze stavby</a></li>
     </ul>
-    <a class="btn btn-outline" href="index.html#kontakt">Mám zájem</a>
+    <div class="nav-cta">
+      <a class="nav-ig" href="{IG_URL}" target="_blank" rel="noopener noreferrer" aria-label="Instagram @dumnetusil">{_IG_SVG}</a>
+      <a class="btn btn-outline" href="index.html#kontakt">Mám zájem</a>
+    </div>
   </div>
 </nav>
 
@@ -2205,7 +2215,7 @@ def render_ze_stavby(stavba: list[dict]) -> str:
     <h1>Ze <em>stavby</em>.</h1>
     <p>Rekonstrukce Domu Netušil běží. Na podzim 2026 probíhá bourání vnitřních konstrukcí a výkopy
     pro nové základy. Postup dokumentujeme po jednotlivých dnech — plánované dokončení
-    <strong>{DOKONCENI}</strong>, energetická třída <strong>A</strong>.</p>
+    <strong>{DOKONCENI}</strong>.</p>
     <div class="ig-callout">
       <span class="ico">{_IG_SVG}</span>
       <p class="txt"><strong>Nejaktuálnější fotky z průběhu výstavby najdete vždy na našem Instagramu.</strong>
