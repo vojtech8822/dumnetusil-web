@@ -1,0 +1,20 @@
+[
+  {
+    "datum": "2026-11-05",
+    "popis": "Výkopy a odkryté základové konstrukce",
+    "fotky": [
+      { "soubor": "stavba-01.jpg", "popisek": "Výkopy v interiéru", "alt": "Výkopy v interiéru domu, odkryté cihelné zdivo a šachta" },
+      { "soubor": "stavba-02.jpg", "popisek": "Odkryté základové konstrukce", "alt": "Odkryté základové konstrukce a výkopové jámy pro nové základy" },
+      { "soubor": "stavba-03.jpg", "popisek": "Odkryté stropní konstrukce", "alt": "Pohled na odkryté stropní trámové konstrukce" }
+    ]
+  },
+  {
+    "datum": "2026-10-29",
+    "popis": "Bourání vnitřních konstrukcí",
+    "fotky": [
+      { "soubor": "stavba-01.jpg", "popisek": "Bourání v interiéru", "alt": "Bourání vnitřních konstrukcí, probouraná příčka a odkryté zdivo" },
+      { "soubor": "stavba-02.jpg", "popisek": "Příprava podlah", "alt": "Interiér po vybourání, rozebrané podlahy a připravené výkopy" },
+      { "soubor": "stavba-03.jpg", "popisek": "Odkryté cihelné zdivo", "alt": "Místnost s odkrytým historickým cihelným zdivem a okny do ulice" }
+    ]
+  }
+]

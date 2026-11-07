@@ -65,7 +65,7 @@ footer .legal{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.1);padding
 
 /* index */
 .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background-image:url('img/vizualizace/ext-1.jpg?v=65715d42');background-size:cover;background-position:center;transform:scale(1.05)}
+.hero-bg{position:absolute;inset:0;background-image:url('img/vizualizace/ext-1.jpg?v=eef0bcb7');background-size:cover;background-position:center;transform:scale(1.05)}
 .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.15) 35%,rgba(0,0,0,.55) 75%,rgba(0,0,0,.88) 100%);z-index:1}
 .hero .inner{position:relative;z-index:2;width:100%;padding:180px 0 90px}
 .hero .eyebrow{color:#e4c792}
@@ -164,7 +164,7 @@ section{padding:120px 0;position:relative}
 @media(max-width:900px){.galerie .head{grid-template-columns:1fr;gap:20px}}
 .galerie h2{margin-bottom:0}
 .galerie .head p{margin:0;color:var(--ink-soft);max-width:520px;font-size:.92rem;font-style:italic}
-.galerie .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:280px 280px;gap:18px}
+.galerie .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:280px;gap:18px}
 .galerie .gal-item{display:block;overflow:hidden;border:0;cursor:zoom-in}
 .galerie .gal-item.big{grid-row:span 2}
 .galerie .gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
@@ -313,3 +313,62 @@ section{padding:120px 0;position:relative}
 .standardy-note{background:var(--bg);border-top:1px solid var(--line)}
 .standardy-note .wrap{padding:64px 0}
 .standardy-note p{max-width:680px;margin-bottom:30px}
+
+/* ze stavby */
+/* Teaser „Ze stavby" na homepage */
+.stavba-teaser{background:var(--paper);padding:100px 0;border-top:1px solid var(--line)}
+.stavba-teaser .grid-2col{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+@media(max-width:900px){.stavba-teaser .grid-2col{grid-template-columns:1fr;gap:34px}}
+.stavba-teaser h2{margin:0 0 18px}
+.stavba-teaser h2 em{font-style:italic;color:var(--accent)}
+.stavba-teaser .lead{font-size:1.06rem;line-height:1.7;color:var(--ink-soft);margin-bottom:26px}
+.badge-vystavba{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:7px 15px;border-radius:999px;margin-bottom:16px}
+.badge-vystavba::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(176,141,87,.55)}70%{box-shadow:0 0 0 9px rgba(176,141,87,0)}100%{box-shadow:0 0 0 0 rgba(176,141,87,0)}}
+.teaser-photos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.teaser-photos .ph{position:relative;overflow:hidden;aspect-ratio:3/4;background:#ddd3c2}
+.teaser-photos .ph img{width:100%;height:100%;object-fit:cover}
+.teaser-photos .ph .cap{position:absolute;left:0;right:0;bottom:0;padding:12px 14px;color:#fff;font-size:.72rem;background:linear-gradient(0deg,rgba(0,0,0,.72),rgba(0,0,0,0))}
+
+/* IG odkazy (patička + kontakt) */
+.footer-ig{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.85)!important}
+.footer-ig:hover{color:#fff!important;border-color:transparent}
+.footer-ig svg{width:18px;height:18px;flex:none}
+.kontakt-ig{display:inline-flex;align-items:center;gap:9px;margin-top:18px;color:#fff;text-decoration:none;font-size:.92rem;border:1px solid rgba(255,255,255,.35);padding:10px 16px;border-radius:999px;transition:border-color .2s,background .2s}
+.kontakt-ig:hover{border-color:#e4c792;background:rgba(255,255,255,.06)}
+.kontakt-ig svg{width:18px;height:18px;flex:none}
+
+/* Podstránka „Ze stavby" */
+.stavba-hero{padding:170px 0 50px;background:var(--bg)}
+.stavba-hero .badge-vystavba{margin-bottom:16px}
+.stavba-hero h1 em{font-style:italic;color:var(--accent)}
+.stavba-hero p{max-width:680px;font-size:1.06rem;line-height:1.7;margin:0;color:var(--ink-soft)}
+.stavba-gal{padding:50px 0 100px;background:var(--bg)}
+.stavba-gal .den{margin-bottom:56px}
+.stavba-gal .den:last-of-type{margin-bottom:0}
+.stavba-gal .den-head{display:flex;align-items:baseline;gap:14px;margin:0 0 18px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.stavba-gal .den-head .datum{font-family:var(--serif);font-size:1.5rem;font-weight:500;color:var(--ink)}
+.stavba-gal .den-head .popis{font-size:.9rem;color:var(--ink-soft)}
+.stavba-gal .den-head .pocet{margin-left:auto;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)}
+.stavba-gal .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:900px){.stavba-gal .grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.stavba-gal .grid{grid-template-columns:1fr}.stavba-gal .den-head{flex-wrap:wrap}.stavba-gal .den-head .pocet{margin-left:0;flex-basis:100%}}
+.stavba-gal .item{position:relative;display:block;overflow:hidden;background:#ddd3c2;border:0;cursor:zoom-in;aspect-ratio:3/4}
+.stavba-gal .item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.stavba-gal .item:hover img{transform:scale(1.03)}
+.stavba-gal .item .cap{position:absolute;left:0;right:0;bottom:0;padding:16px 18px;color:#fff;font-size:.82rem;background:linear-gradient(0deg,rgba(0,0,0,.74),rgba(0,0,0,0))}
+.stavba-gal .back{display:inline-block;margin-top:40px;font-size:.84rem;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:var(--accent-dark);border-bottom:1px solid var(--accent);padding-bottom:4px}
+
+/* IG callout (hero „Ze stavby" — web = milníky po dnech, IG = živě nejnovější) */
+.ig-callout{display:flex;align-items:center;gap:16px;margin-top:30px;padding:18px 22px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;max-width:700px}
+.ig-callout .ico{flex:none;color:var(--accent);display:flex}
+.ig-callout .ico svg{width:34px;height:34px}
+.ig-callout .txt{font-size:.96rem;line-height:1.55;color:var(--ink-soft);margin:0}
+.ig-callout .txt strong{color:var(--ink);font-weight:600}
+.ig-callout .txt a{font-weight:600;color:var(--accent-dark);border-bottom:1px solid var(--accent);white-space:nowrap}
+.ig-callout .txt a:hover{border-color:var(--accent-dark)}
+@media(max-width:600px){.ig-callout{flex-direction:column;align-items:flex-start;gap:12px}}
+/* krátká IG varianta na HP teaseru */
+.teaser-ig{display:flex;align-items:center;gap:8px;margin-top:16px;font-size:.9rem;color:var(--ink-soft)}
+.teaser-ig svg{width:17px;height:17px;flex:none;color:var(--accent)}
+.teaser-ig a{font-weight:600;color:var(--accent-dark);border-bottom:1px solid var(--accent)}

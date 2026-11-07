@@ -156,6 +156,46 @@ def load_ceny() -> dict:
 
     return byty
 
+
+def load_stavba() -> list[dict]:
+    """Načti stavba.json — stavební deník (seznam dnů, nejnovější první).
+
+    Schéma: [{"datum":"YYYY-MM-DD","popis":"…","fotky":[{"soubor":"…","popisek":"…","alt":"…"}]}]
+    Pokud soubor chybí/je prázdný → []. Validuje ISO datum a existenci fotek na disku.
+    Volá se JEN z main() (ne na úrovni modulu) — aby import generate.py (playbooky) zůstal bez vedlejšího efektu.
+    """
+    stavba_file = Path(__file__).parent / "stavba.json"
+    if not stavba_file.exists():
+        print("⚠ stavba.json nenalezen — deník 'Ze stavby' bude prázdný", file=sys.stderr)
+        return []
+
+    data = json.loads(stavba_file.read_text())
+    # Přijmi jak holý seznam, tak {"dny": [...]} pro budoucí rozšíření
+    dny = data if isinstance(data, list) else data.get("dny", [])
+
+    root = Path(__file__).parent
+    errors = []
+    for den in dny:
+        datum = den.get("datum", "")
+        try:
+            date.fromisoformat(datum)
+        except (ValueError, TypeError):
+            errors.append(f"  den '{datum}': neplatné datum (očekáváno YYYY-MM-DD)")
+            continue
+        for foto in den.get("fotky", []):
+            rel = f"img/stavba/{datum}/{foto.get('soubor', '')}"
+            if not (root / rel).exists():
+                errors.append(f"  den {datum}: fotka chybí na disku — {rel}")
+    if errors:
+        print("✗ Chyba ve stavba.json:", file=sys.stderr)
+        print("\n".join(errors), file=sys.stderr)
+        sys.exit(1)
+
+    # Seřaď sestupně dle data (nejnovější nahoře) — nezávisle na pořadí v souboru
+    dny = [d for d in dny if d.get("fotky")]
+    dny.sort(key=lambda d: d["datum"], reverse=True)
+    return dny
+
 # ---------------------------------------------------------------------------
 # DATA — 14 bytů
 # ---------------------------------------------------------------------------
@@ -354,7 +394,7 @@ APARTMENTS = [
             "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
         ],
-        "images": ["3np-1kk.jpg", "3np-1kk-ii.jpg", "ext-4.jpg"],
+        "images": ["3np-1kk.jpg", "3np-1kk-ii.jpg", "ext-1.jpg"],
         "hero_img": "3np-1kk.jpg",
         "thumb_gradient": "linear-gradient(135deg,#aa9474,#7a6240)",
         "next_id": "07",
@@ -481,7 +521,7 @@ APARTMENTS = [
             "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
         ],
-        "images": ["3np-1kk-2.jpg", "3np-1kk-ii.jpg", "ext-4.jpg"],
+        "images": ["3np-1kk-2.jpg", "3np-1kk-ii.jpg", "ext-1.jpg"],
         "hero_img": "3np-1kk-2.jpg",
         "thumb_gradient": "linear-gradient(135deg,#b09474,#806242)",
         "next_id": "11",
@@ -575,7 +615,7 @@ APARTMENTS = [
             "Koupelna se sprchovým koutem a WC",
             "Tepelné čerpadlo",
         ],
-        "images": ["4np-1kk.jpg", "3np-1kk-2.jpg", "ext-4.jpg"],
+        "images": ["4np-1kk.jpg", "3np-1kk-2.jpg", "ext-1.jpg"],
         "hero_img": "4np-1kk.jpg",
         "thumb_gradient": "linear-gradient(135deg,#ab8e6c,#735944)",
         "next_id": "14",
@@ -747,6 +787,7 @@ def _footer_html(base: str = "", on_index: bool = False) -> str:
             <li><a href="{base}standardy.html">Standard vybavení</a></li>
             <li><a href="{index_link}#lokalita">Lokalita</a></li>
             <li><a href="{index_link}#galerie">Galerie</a></li>
+            <li><a href="{base}ze-stavby.html">Ze stavby</a></li>
             <li><a href="{index_link}#kontakt">Kontakt</a></li>
           </ul>
         </div>
@@ -755,6 +796,7 @@ def _footer_html(base: str = "", on_index: bool = False) -> str:
           <p><strong>Vojtěch Havránek</strong><br><a href="tel:+420605201450">+420 605 201 450</a></p>
           <p><strong>Martina Bodová</strong><br><a href="tel:+420603722268">+420 603 722 268</a></p>
           <p><a href="mailto:info@dumnetusil.cz">info@dumnetusil.cz</a></p>
+          <p style="margin-top:12px"><a class="footer-ig" href="{IG_URL}" target="_blank" rel="noopener noreferrer" aria-label="Instagram @dumnetusil">{_IG_SVG} @dumnetusil</a></p>
         </div>
         <div>
           <h4>Investor &amp; developer</h4>
@@ -1177,7 +1219,7 @@ def render_apt_page(apt: dict) -> str:
             else 'Tento byt je prodán.'
         }</h2>
         <p>{
-            'Ozvěte se nám pro rezervaci, prohlídku nebo individuální nabídku. Pro předplatitele (předplacení 60–80 % kupní ceny) je k dispozici výhodnější cena. Odpovídáme do 24 hodin.' if status == 'k dispozici'
+            'Ozvěte se nám pro rezervaci, prohlídku nebo individuální nabídku. Zvýhodněnou cenu pro předplatitele probíráme osobně. Odpovídáme do 24 hodin.' if status == 'k dispozici'
             else 'Tento byt je momentálně rezervován. Můžete si nechat zaslat upozornění, pokud by se status změnil — případně se podívejte na podobné dostupné byty.' if status == 'rezervovano'
             else 'Tento byt byl prodán. Pokud Vás zajímají podobné dispozice v Domě Netušil, podívejte se na ostatní byty.'
         }</p>
@@ -1187,7 +1229,7 @@ def render_apt_page(apt: dict) -> str:
             (f'Kupní cena{cena_label_extra}') if status != 'prodano' else (f'Prodejní cena{cena_label_extra}')
         }</div>
         <div class="amount {'amount-sold' if status == 'prodano' else ''}">{cena_str}&nbsp;Kč</div>
-        <div class="sub">{cena_m2_str} Kč/m²{kc_m2_pozn}{' · Výhodnější cena pro předplatitele (60–80 % kupní ceny)' if status == 'k dispozici' else ''}</div>
+        <div class="sub">{cena_m2_str} Kč/m²{kc_m2_pozn}{' · Zvýhodněná cena pro předplatitele (osobně)' if status == 'k dispozici' else ''}</div>
         <a class="{cta_class}" href="{cta_href}"{cta_aria}>{cta_text}</a>
         <a class="btn btn-secondary" href="../files/karty/Karta-bytu-{aid}.pdf" download>Stáhnout kartu bytu (PDF)</a>
         <span class="small">{
@@ -1328,7 +1370,7 @@ section{padding:120px 0;position:relative}
 @media(max-width:900px){.galerie .head{grid-template-columns:1fr;gap:20px}}
 .galerie h2{margin-bottom:0}
 .galerie .head p{margin:0;color:var(--ink-soft);max-width:520px;font-size:.92rem;font-style:italic}
-.galerie .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:280px 280px;gap:18px}
+.galerie .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:280px;gap:18px}
 .galerie .gal-item{display:block;overflow:hidden;border:0;cursor:zoom-in}
 .galerie .gal-item.big{grid-row:span 2}
 .galerie .gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
@@ -1352,7 +1394,8 @@ section{padding:120px 0;position:relative}
 """).strip()
 
 
-def render_index(apartments: list[dict]) -> str:
+def render_index(apartments: list[dict], stavba: list[dict] | None = None) -> str:
+    stavba = stavba or []
     # Spočítat počty
     total_count = len(apartments)
     count_1kk = sum(1 for a in apartments if a["dispozice"].startswith("1+kk"))
@@ -1404,7 +1447,7 @@ def render_index(apartments: list[dict]) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Dům Netušil — 14 komorních bytů 1+kk a 2+kk v historickém měšťanském domě v centru Brna-Husovic. Zdobná fasáda, tepelné čerpadlo, zelená střecha. Předání {DOKONCENI}.">
+<meta name="description" content="Dům Netušil — 14 komorních bytů 1+kk, 2+kk a 3+kk v historickém měšťanském domě v centru Brna-Husovic. Zdobná fasáda, tepelné čerpadlo, zelená střecha. Předání {DOKONCENI}.">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
@@ -1431,7 +1474,7 @@ def render_index(apartments: list[dict]) -> str:
  "@type": "ApartmentComplex",
  "name": "Dům Netušil",
  "url": "{SITE_URL}/",
- "description": "14 komorních bytů 1+kk a 2+kk v historickém měšťanském domě v Brně-Husovicích. Předání {DOKONCENI}.",
+ "description": "14 komorních bytů 1+kk, 2+kk a 3+kk v historickém měšťanském domě v Brně-Husovicích. Předání {DOKONCENI}.",
  "numberOfAccommodationUnits": 14,
  "address": {{"@type": "PostalAddress", "streetAddress": "Netušilova 712/15", "addressLocality": "Brno-Husovice", "postalCode": "61400", "addressCountry": "CZ"}},
  "email": "info@dumnetusil.cz",
@@ -1454,6 +1497,7 @@ def render_index(apartments: list[dict]) -> str:
       <li><a href="standardy.html">Standard</a></li>
       <li><a href="#lokalita">Lokalita</a></li>
       <li><a href="#galerie">Galerie</a></li>
+      <li><a href="ze-stavby.html">Ze stavby</a></li>
     </ul>
     <a class="btn btn-outline" href="#kontakt">Mám zájem</a>
   </div>
@@ -1599,10 +1643,14 @@ def render_index(apartments: list[dict]) -> str:
       <a href="img/vizualizace/1np-2kk.jpg" class="gal-item"><img src="img/vizualizace/1np-2kk.jpg" alt="Vizualizace obývacího pokoje s kuchyňským koutem (2+kk)" loading="lazy"></a>
       <a href="img/vizualizace/1np-loznice-2kk.jpg" class="gal-item"><img src="img/vizualizace/1np-loznice-2kk.jpg" alt="Vizualizace ložnice v bytě 2+kk" loading="lazy"></a>
       <a href="img/vizualizace/koupelna.jpg" class="gal-item"><img src="img/vizualizace/koupelna.jpg" alt="Vzorová koupelna se sprchovým koutem" loading="lazy"></a>
-      <a href="img/vizualizace/4np-2kk.jpg" class="gal-item"><img src="img/vizualizace/4np-2kk.jpg" alt="Vizualizace podkrovního bytu 2+kk" loading="lazy"></a>
+      <a href="img/vizualizace/4np-2kk.jpg" class="gal-item"><img src="img/vizualizace/4np-2kk.jpg" alt="Vizualizace obývacího pokoje s kuchyní (byt 2+kk)" loading="lazy"></a>
+      <a href="img/vizualizace/ext-6.jpg" class="gal-item"><img src="img/vizualizace/ext-6.jpg" alt="Pohled na zadní trakt domu s balkony a zelení" loading="lazy"></a>
+      <a href="img/vizualizace/4np-1kk.jpg" class="gal-item"><img src="img/vizualizace/4np-1kk.jpg" alt="Vizualizace podkrovního bytu se střešními okny" loading="lazy"></a>
     </div>
   </div>
 </section>
+
+{_stavba_teaser_html(stavba)}
 
 <!-- KONTAKT -->
 <section class="kontakt" id="kontakt">
@@ -1615,6 +1663,10 @@ def render_index(apartments: list[dict]) -> str:
           Pro prohlídku modelu, individuální nabídku, otázky k financování nebo investičnímu potenciálu.
           Detaily slevy pro předplatitele probíráme osobně. Odpovídáme do 24 hodin.
         </p>
+        <a class="kontakt-ig" href="{IG_URL}" target="_blank" rel="noopener noreferrer">
+          {_IG_SVG}
+          Sledujte nás na Instagramu · @dumnetusil
+        </a>
       </div>
       <div class="contact-cards">
         <div class="contact-card">
@@ -1807,7 +1859,7 @@ def render_standardy() -> str:
 <section class="standard-blok">
   <div class="wrap">
     <span class="eyebrow">Energie a komfort</span>
-    <h2>Třída A. Podlahové vytápění i chlazení.</h2>
+    <h2>Energetická třída A. Podlahové vytápění i chlazení.</h2>
     <p class="sub">Dům je navržen pro nízké provozní náklady a celoroční komfort — v zimě
     podlahové vytápění, v létě podlahové chlazení.</p>
     <ul>
@@ -1916,6 +1968,267 @@ SHARED_JS = dedent("""
 
 
 # ---------------------------------------------------------------------------
+# STRÁNKA „ZE STAVBY" (ze-stavby.html) — stavební deník + teaser na HP
+# ---------------------------------------------------------------------------
+
+_CZ_MESICE_GEN = ["", "ledna", "února", "března", "dubna", "května", "června",
+                  "července", "srpna", "září", "října", "listopadu", "prosince"]
+
+
+def _cz_date_long(iso: str) -> str:
+    """'2026-11-05' → '5. listopadu 2026'."""
+    d = date.fromisoformat(iso)
+    return f"{d.day}. {_CZ_MESICE_GEN[d.month]} {d.year}"
+
+
+def _cz_date_num(iso: str) -> str:
+    """'2026-11-05' → '5. 11. 2026'."""
+    d = date.fromisoformat(iso)
+    return f"{d.day}. {d.month}. {d.year}"
+
+
+def _cz_pocet_fotek(n: int) -> str:
+    if n == 1:
+        return "1 fotka"
+    if 2 <= n <= 4:
+        return f"{n} fotky"
+    return f"{n} fotek"
+
+
+# IG ikona (inline SVG — CSP: žádný externí zdroj)
+_IG_SVG = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+           'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+           '<rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/>'
+           '<circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>')
+IG_URL = "https://www.instagram.com/dumnetusil"
+
+
+STAVBA_CSS = dedent("""
+/* Teaser „Ze stavby" na homepage */
+.stavba-teaser{background:var(--paper);padding:100px 0;border-top:1px solid var(--line)}
+.stavba-teaser .grid-2col{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+@media(max-width:900px){.stavba-teaser .grid-2col{grid-template-columns:1fr;gap:34px}}
+.stavba-teaser h2{margin:0 0 18px}
+.stavba-teaser h2 em{font-style:italic;color:var(--accent)}
+.stavba-teaser .lead{font-size:1.06rem;line-height:1.7;color:var(--ink-soft);margin-bottom:26px}
+.badge-vystavba{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:7px 15px;border-radius:999px;margin-bottom:16px}
+.badge-vystavba::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(176,141,87,.55)}70%{box-shadow:0 0 0 9px rgba(176,141,87,0)}100%{box-shadow:0 0 0 0 rgba(176,141,87,0)}}
+.teaser-photos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.teaser-photos .ph{position:relative;overflow:hidden;aspect-ratio:3/4;background:#ddd3c2}
+.teaser-photos .ph img{width:100%;height:100%;object-fit:cover}
+.teaser-photos .ph .cap{position:absolute;left:0;right:0;bottom:0;padding:12px 14px;color:#fff;font-size:.72rem;background:linear-gradient(0deg,rgba(0,0,0,.72),rgba(0,0,0,0))}
+
+/* IG odkazy (patička + kontakt) */
+.footer-ig{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.85)!important}
+.footer-ig:hover{color:#fff!important;border-color:transparent}
+.footer-ig svg{width:18px;height:18px;flex:none}
+.kontakt-ig{display:inline-flex;align-items:center;gap:9px;margin-top:18px;color:#fff;text-decoration:none;font-size:.92rem;border:1px solid rgba(255,255,255,.35);padding:10px 16px;border-radius:999px;transition:border-color .2s,background .2s}
+.kontakt-ig:hover{border-color:#e4c792;background:rgba(255,255,255,.06)}
+.kontakt-ig svg{width:18px;height:18px;flex:none}
+
+/* Podstránka „Ze stavby" */
+.stavba-hero{padding:170px 0 50px;background:var(--bg)}
+.stavba-hero .badge-vystavba{margin-bottom:16px}
+.stavba-hero h1 em{font-style:italic;color:var(--accent)}
+.stavba-hero p{max-width:680px;font-size:1.06rem;line-height:1.7;margin:0;color:var(--ink-soft)}
+.stavba-gal{padding:50px 0 100px;background:var(--bg)}
+.stavba-gal .den{margin-bottom:56px}
+.stavba-gal .den:last-of-type{margin-bottom:0}
+.stavba-gal .den-head{display:flex;align-items:baseline;gap:14px;margin:0 0 18px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.stavba-gal .den-head .datum{font-family:var(--serif);font-size:1.5rem;font-weight:500;color:var(--ink)}
+.stavba-gal .den-head .popis{font-size:.9rem;color:var(--ink-soft)}
+.stavba-gal .den-head .pocet{margin-left:auto;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)}
+.stavba-gal .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:900px){.stavba-gal .grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.stavba-gal .grid{grid-template-columns:1fr}.stavba-gal .den-head{flex-wrap:wrap}.stavba-gal .den-head .pocet{margin-left:0;flex-basis:100%}}
+.stavba-gal .item{position:relative;display:block;overflow:hidden;background:#ddd3c2;border:0;cursor:zoom-in;aspect-ratio:3/4}
+.stavba-gal .item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.stavba-gal .item:hover img{transform:scale(1.03)}
+.stavba-gal .item .cap{position:absolute;left:0;right:0;bottom:0;padding:16px 18px;color:#fff;font-size:.82rem;background:linear-gradient(0deg,rgba(0,0,0,.74),rgba(0,0,0,0))}
+.stavba-gal .back{display:inline-block;margin-top:40px;font-size:.84rem;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:var(--accent-dark);border-bottom:1px solid var(--accent);padding-bottom:4px}
+
+/* IG callout (hero „Ze stavby" — web = milníky po dnech, IG = živě nejnovější) */
+.ig-callout{display:flex;align-items:center;gap:16px;margin-top:30px;padding:18px 22px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;max-width:700px}
+.ig-callout .ico{flex:none;color:var(--accent);display:flex}
+.ig-callout .ico svg{width:34px;height:34px}
+.ig-callout .txt{font-size:.96rem;line-height:1.55;color:var(--ink-soft);margin:0}
+.ig-callout .txt strong{color:var(--ink);font-weight:600}
+.ig-callout .txt a{font-weight:600;color:var(--accent-dark);border-bottom:1px solid var(--accent);white-space:nowrap}
+.ig-callout .txt a:hover{border-color:var(--accent-dark)}
+@media(max-width:600px){.ig-callout{flex-direction:column;align-items:flex-start;gap:12px}}
+/* krátká IG varianta na HP teaseru */
+.teaser-ig{display:flex;align-items:center;gap:8px;margin-top:16px;font-size:.9rem;color:var(--ink-soft)}
+.teaser-ig svg{width:17px;height:17px;flex:none;color:var(--accent)}
+.teaser-ig a{font-weight:600;color:var(--accent-dark);border-bottom:1px solid var(--accent)}
+""").strip()
+
+
+def _stavba_teaser_html(stavba: list[dict]) -> str:
+    """Teaser na HP: 1. fotka ze dvou nejnovějších dnů (chronologicky: starší vlevo, nová vpravo)."""
+    if not stavba:
+        return ""
+    vyber = []  # (den, foto) z nejvýše dvou nejnovějších dnů
+    for den in stavba[:2]:
+        if den.get("fotky"):
+            vyber.append((den, den["fotky"][0]))
+    vyber = list(reversed(vyber))  # starší vlevo, nejnovější vpravo (dle preview)
+
+    fotky_html = []
+    for den, foto in vyber:
+        src = f"img/stavba/{den['datum']}/{foto['soubor']}"
+        alt = _escape(foto.get("alt") or foto.get("popisek", ""))
+        cap = _escape(f"Netušilova 15 · {_cz_date_num(den['datum'])}")
+        fotky_html.append(
+            f'<div class="ph"><img src="{src}" alt="{alt}"><span class="cap">{cap}</span></div>'
+        )
+
+    return dedent(f"""
+    <section class="stavba-teaser" id="ze-stavby">
+      <div class="wrap">
+        <div class="grid-2col">
+          <div>
+            <span class="badge-vystavba">Probíhá výstavba</span>
+            <h2>Sledujte, jak <em>dům roste.</em></h2>
+            <p class="lead">Rekonstrukce Domu Netušil právě běží. Na podzim 2026 probíhá bourání
+            vnitřních konstrukcí a výkopy pro nové základy. Postup výstavby dokumentujeme a pravidelně
+            doplňujeme. Plánované dokončení <strong>{DOKONCENI}</strong>, energetická třída <strong>A</strong>.</p>
+            <a class="btn btn-primary" href="ze-stavby.html">Zobrazit galerii ze stavby →</a>
+            <span class="teaser-ig">{_IG_SVG} Nejnovější fotky živě na <a href="{IG_URL}" target="_blank" rel="noopener noreferrer">Instagramu @dumnetusil</a></span>
+          </div>
+          <div class="teaser-photos">
+            {chr(10).join("            " + f for f in fotky_html).strip()}
+          </div>
+        </div>
+      </div>
+    </section>
+    """).strip()
+
+
+def render_ze_stavby(stavba: list[dict]) -> str:
+    title = "Ze stavby — Dům Netušil"
+    description = ("Stavební deník rekonstrukce Domu Netušil v Brně-Husovicích — fotodokumentace "
+                   "postupu výstavby po dnech. Plánované dokončení " + DOKONCENI + ", energetická třída A.")
+    # OG obrázek = 1. fotka nejnovějšího dne, fallback ext-1
+    if stavba and stavba[0].get("fotky"):
+        og_rel = f"img/stavba/{stavba[0]['datum']}/{stavba[0]['fotky'][0]['soubor']}"
+    else:
+        og_rel = "img/vizualizace/ext-1.jpg"
+
+    # Bloky dnů (nejnovější nahoře — load_stavba už seřadil)
+    dny_html = []
+    for den in stavba:
+        items = []
+        for foto in den["fotky"]:
+            src = f"img/stavba/{den['datum']}/{foto['soubor']}"
+            alt = _escape(foto.get("alt") or foto.get("popisek", ""))
+            cap = _escape(f"{foto.get('popisek', '')} · Netušilova 15")
+            items.append(
+                f'<a class="item" href="{src}"><img src="{src}" alt="{alt}" loading="lazy">'
+                f'<span class="cap">{cap}</span></a>'
+            )
+        dny_html.append(dedent(f"""
+        <div class="den">
+          <div class="den-head">
+            <span class="datum">{_escape(_cz_date_long(den['datum']))}</span>
+            <span class="popis">{_escape(den.get('popis', ''))}</span>
+            <span class="pocet">{_cz_pocet_fotek(len(den['fotky']))}</span>
+          </div>
+          <div class="grid">
+            {chr(10).join("            " + it for it in items).strip()}
+          </div>
+        </div>
+        """).strip())
+
+    if dny_html:
+        gal_inner = "\n\n    ".join(dny_html) + '\n\n    <a class="back" href="index.html">← Zpět na úvod</a>'
+    else:
+        gal_inner = ('<p style="max-width:680px;color:var(--ink-soft)">Fotodokumentaci postupu '
+                     'výstavby připravujeme. Aktuální dění sledujte na Instagramu '
+                     f'<a href="{IG_URL}" target="_blank" rel="noopener noreferrer">@dumnetusil</a>.</p>'
+                     '\n\n    <a class="back" href="index.html">← Zpět na úvod</a>')
+
+    return dedent(f"""\
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="{_escape(description)}">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'">
+<meta name="theme-color" content="#1b1b1b">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="{SITE_URL}/ze-stavby.html">
+<script type="application/ld+json">{{"@context":"https://schema.org","@type":"WebPage","name":"Ze stavby — Dům Netušil","url":"{SITE_URL}/ze-stavby.html","isPartOf":{{"@type":"WebSite","name":"Dům Netušil","url":"{SITE_URL}"}}}}</script>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="{_escape(title)}">
+<meta property="og:description" content="{_escape(description)}">
+<meta property="og:url" content="{SITE_URL}/ze-stavby.html">
+<meta property="og:image" content="{SITE_URL}/{og_rel}">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Dům Netušil">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{_escape(title)}">
+<meta name="twitter:description" content="{_escape(description)}">
+<meta name="twitter:image" content="{SITE_URL}/{og_rel}">
+
+<title>{_escape(title)}</title>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <a class="logo" href="index.html">Dům Netušil<small>Netušilova 15 · Brno-Husovice</small></a>
+    <ul>
+      <li><a href="index.html#o-projektu">O projektu</a></li>
+      <li><a href="index.html#byty">Byty</a></li>
+      <li><a href="standardy.html">Standard</a></li>
+      <li><a href="index.html#galerie">Galerie</a></li>
+      <li><a href="ze-stavby.html">Ze stavby</a></li>
+    </ul>
+    <a class="btn btn-outline" href="index.html#kontakt">Mám zájem</a>
+  </div>
+</nav>
+
+<section class="stavba-hero">
+  <div class="wrap">
+    <span class="badge-vystavba">Probíhá výstavba</span>
+    <h1>Ze <em>stavby</em>.</h1>
+    <p>Rekonstrukce Domu Netušil běží. Na podzim 2026 probíhá bourání vnitřních konstrukcí a výkopy
+    pro nové základy. Postup dokumentujeme po jednotlivých dnech — plánované dokončení
+    <strong>{DOKONCENI}</strong>, energetická třída <strong>A</strong>.</p>
+    <div class="ig-callout">
+      <span class="ico">{_IG_SVG}</span>
+      <p class="txt"><strong>Nejaktuálnější fotky z průběhu výstavby najdete vždy na našem Instagramu.</strong>
+      Tady na webu ukazujeme milníky po dnech — na Instagramu přidáváme to nejnovější živě.
+      <a href="{IG_URL}" target="_blank" rel="noopener noreferrer">Sledujte @dumnetusil →</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="stavba-gal">
+  <div class="wrap">
+    {gal_inner}
+  </div>
+</section>
+
+{_footer_html()}
+
+</body>
+</html>
+""")
+
+
+# ---------------------------------------------------------------------------
 # sitemap.xml a robots.txt
 # ---------------------------------------------------------------------------
 
@@ -1925,6 +2238,7 @@ def render_sitemap() -> str:
     for apt in APARTMENTS:
         urls.append(f"  <url><loc>{SITE_URL}/byty/byt-{apt['id']}.html</loc><lastmod>{today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>")
     urls.append(f"  <url><loc>{SITE_URL}/standardy.html</loc><lastmod>{today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>")
+    urls.append(f"  <url><loc>{SITE_URL}/ze-stavby.html</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>")
     urls.append(f"  <url><loc>{SITE_URL}/ochrana-osobnich-udaju.html</loc><lastmod>{today}</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>")
     return dedent(f"""\
 <?xml version="1.0" encoding="UTF-8"?>
@@ -2057,9 +2371,12 @@ def main():
         apt["status"] = info.get("status", "k dispozici")
         apt["status_poznamka"] = info.get("poznamka", "")
 
+    # Načíst stavební deník „Ze stavby"
+    stavba = load_stavba()
+
     # styles.css
     css = (SHARED_CSS + "\n\n/* index */\n" + INDEX_CSS + "\n\n/* apt page */\n" + APT_PAGE_CSS
-           + "\n\n/* standard vybavení */\n" + STANDARD_CSS)
+           + "\n\n/* standard vybavení */\n" + STANDARD_CSS + "\n\n/* ze stavby */\n" + STAVBA_CSS)
     import re as _re_css
     css = _re_css.sub(r"url\('(img/[^'?]+)'\)",
                  lambda m: f"url('{m.group(1)}?v={_asset_hash(root, m.group(1))}')" if _asset_hash(root, m.group(1)) else m.group(0),
@@ -2074,10 +2391,13 @@ def main():
         (byty_dir / f"byt-{apt['id']}.html").write_text(bust_assets(render_apt_page(apt), root))
 
     # index.html
-    (root / "index.html").write_text(bust_assets(render_index(APARTMENTS), root))
+    (root / "index.html").write_text(bust_assets(render_index(APARTMENTS, stavba), root))
 
     # standardy.html
     (root / "standardy.html").write_text(bust_assets(render_standardy(), root))
+
+    # ze-stavby.html (stavební deník)
+    (root / "ze-stavby.html").write_text(bust_assets(render_ze_stavby(stavba), root))
 
     # sitemap, robots, .htaccess
     (root / "sitemap.xml").write_text(render_sitemap())
@@ -2103,8 +2423,9 @@ def main():
     reserved = sum(1 for a in APARTMENTS if a["status"] == "rezervovano")
     sold = sum(1 for a in APARTMENTS if a["status"] == "prodano")
 
-    print(f"✓ Generováno {len(APARTMENTS)} podstránek + index + standardy + sitemap + robots + .htaccess + 404.html + .nojekyll")
+    print(f"✓ Generováno {len(APARTMENTS)} podstránek + index + standardy + ze-stavby + sitemap + robots + .htaccess + 404.html + .nojekyll")
     print(f"  Status: {avail} k dispozici · {reserved} rezervováno · {sold} prodáno")
+    print(f"  Deník 'Ze stavby': {len(stavba)} dnů, {sum(len(d['fotky']) for d in stavba)} fotek")
 
 
 if __name__ == "__main__":
